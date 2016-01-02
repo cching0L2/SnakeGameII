@@ -68,10 +68,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick() {
-        if (keyController.getDirection() == null)
-            snake.move(Direction.Right);
-        else
-            snake.move(keyController.getDirection());
+        snake.tick();
     }
 
     private void render() {
