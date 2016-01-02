@@ -11,23 +11,28 @@ public class Position{
         switch(dir){
         case Up: {
             x = pos.getX();
-            y = pos.getY()-1;
+            y = pos.getY()-Game.GRID_SIZE;
+            break;
         }
         case Down: {
             x = pos.getX();
-            y = pos.getY()+1;
+            y = pos.getY()+Game.GRID_SIZE;
+            break;
         }
         case Right: {
-            x = pos.getX()+1;
+            x = pos.getX()+Game.GRID_SIZE;
             y = pos.getY();
+            break;
         }
         case Left: {
-            x = pos.getX()-1;
+            x = pos.getX()-Game.GRID_SIZE;
             y = pos.getY();
+            break;
         }
         default:{
             x = pos.getX();
             y = pos.getY();
+            break;
         }
         }
         
@@ -41,7 +46,15 @@ public class Position{
         return y;
     }
     
+    public boolean equals(Object o){
+        if(!(o instanceof Position))
+            return false;
+        Position temp = (Position)o;
+        if(temp.getX()==x && temp.getY()==y) return true;
+        else return false;
+    }
+    
     public String toString(){
-        return "Position("+x+", "+y+")";
+        return "Position("+Util.pixToGrid(x)+", "+Util.pixToGrid(y)+")";
     }
 }

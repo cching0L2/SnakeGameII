@@ -1,6 +1,6 @@
 public class Util {
     
-    public int clamp(int val, int min, int max) {
+    public static int clamp(int val, int min, int max) {
         if (val < min)
             return min;
         else if (val > max)
@@ -9,11 +9,11 @@ public class Util {
             return val;
     }
     
-    public int pixToGrid(int pix){
-        return 0;
+    public static int pixToGrid(int pix){
+        return pix / Game.GRID_SIZE;
     }
     
-    public int gridToPix(int grid){
-        return 0;
+    public static int gridToPix(int grid){
+        return grid * Game.GRID_SIZE;
     }
 }

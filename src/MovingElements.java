@@ -4,6 +4,6 @@ public abstract class MovingElements extends GameElements{
         this.cat = cat;
     }
     
-    public abstract void move(Position pos, Direction dir);
+    public abstract void move(Direction dir);
     
 }
