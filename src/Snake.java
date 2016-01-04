@@ -138,4 +138,8 @@ public class Snake extends MovingElements {
     private Position getHeadPosition() {
         return snake.get(0);
     }
+    
+    public void clearSnake(){
+        snake.clear();
+    }
 }

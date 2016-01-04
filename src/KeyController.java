@@ -49,4 +49,8 @@ public class KeyController extends KeyAdapter {
     public Direction getDirection(){
         return direction;
     }
+    
+    public void resetInitialDirection(Direction initialDirection){
+        direction = initialDirection;
+    }
 }

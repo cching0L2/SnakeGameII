@@ -36,6 +36,7 @@ public class Game extends Canvas implements Runnable {
     private KeyController keyController;
     private Handler handler;
     private HUD hud;
+    private Menu menu;
 
     public static State gameState = State.Game;
 
@@ -49,8 +50,10 @@ public class Game extends Canvas implements Runnable {
         handler.addObject(new Snake(Category.Snake, keyController, handler, hud));
         handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(GB_WIDTH)) * GRID_SIZE,
                 random.nextInt(Util.pixToGrid(GB_HEIGHT)) * GRID_SIZE), Category.Food));
+        menu = new Menu(keyController, hud, handler);
 
         this.addKeyListener(keyController);
+        this.addMouseListener(menu); 
     }
 
     public synchronized void start() {
@@ -143,9 +146,9 @@ public class Game extends Canvas implements Runnable {
                 e.printStackTrace();
             }
             g.setColor(NoticeColor);
-            g.fillRect(GB_X+(GB_WIDTH-200)/2, GB_Y+(GB_HEIGHT-100)/4, 200, 100);
+            g.fillRect(GB_X+(GB_WIDTH-200)/2, GB_Y+(GB_HEIGHT-100)/4, 200, 280);
             g.setColor(GBBorderColor);
-            g.drawRect(GB_X+(GB_WIDTH-200)/2, GB_Y+(GB_HEIGHT-100)/4, 200, 100);
+            g.drawRect(GB_X+(GB_WIDTH-200)/2, GB_Y+(GB_HEIGHT-100)/4, 200, 280);
             Graphics2D g2d = (Graphics2D)g;
             g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
                     RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -153,7 +156,26 @@ public class Game extends Canvas implements Runnable {
             g.drawString("You lost with a score of: ", 175, 205);
             g.setColor(GBBorderColor);
             g.setFont(UIFont24);
-            g.drawString(Integer.toString(hud.getScore()), 245, 235);
+            g.drawString(Integer.toString(hud.getScore()), 245, 240);
+            
+            g.setFont(UIFont20B);
+            g.setColor(GBButtonColor);
+            g.fillRect(185, 270, 155, 40);
+            g.setColor(GBBorderColor);
+            g.drawRect(185, 270, 155, 40);
+            g.drawString("New Game", 220, 295);
+            
+            g.setColor(GBButtonColor);
+            g.fillRect(185, 325, 155, 40);
+            g.setColor(GBBorderColor);
+            g.drawRect(185, 325, 155, 40);
+            g.drawString("Menu", 240, 350);
+            
+            g.setColor(GBButtonColor);
+            g.fillRect(185, 380, 155, 40);
+            g.setColor(GBBorderColor);
+            g.drawRect(185, 380, 155, 40);
+            g.drawString("Quit", 247, 405);
         }
         
         else if(gameState == State.Pause){
