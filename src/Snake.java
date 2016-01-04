@@ -20,12 +20,14 @@ public class Snake extends MovingElements {
     private Random random;
     private KeyController controller;
     private Handler handler;
+    private HUD hud;
 
-    public Snake(Category cat, KeyController controller, Handler handler) {
+    public Snake(Category cat, KeyController controller, Handler handler, HUD hud) {
         super(Category.Snake);
         random = new Random();
         this.handler = handler;
         this.controller = controller;
+        this.hud = hud;
         for (int i = 0; i < INITIAL_LENGTH; i++) {
             snake.add(new Position(INITIAL_X - Util.gridToPix(i), INITIAL_Y));
         }
@@ -47,6 +49,8 @@ public class Snake extends MovingElements {
                 Food food = (Food)tempObject;
                 if(Collision.snakeEatFood(this, food)){
                     grow();
+                    hud.setScore(hud.getScore()+1);
+                    hud.setLevel(hud.getScore()/10);
                     food.setEaten(true);
                     handler.removeObject(tempObject);
                     handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(Game.GB_WIDTH))*Game.GRID_SIZE
