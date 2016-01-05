@@ -101,7 +101,6 @@ public class Game extends Canvas implements Runnable {
 
     private void tick() {
         if (gameState == State.Menu) {
-
         }
 
         else if (gameState == State.Game) {
@@ -160,6 +159,7 @@ public class Game extends Canvas implements Runnable {
             progressBar.render(g);
 
         } else if (gameState == State.Menu) {
+            handler.render(g);
             g.setColor(GBBorderColor);
             g.setFont(TitleFont);
             Graphics2D g2d = (Graphics2D) g;
@@ -173,10 +173,10 @@ public class Game extends Canvas implements Runnable {
             g.drawString("Quit", 90, 350);
             g.drawString("Reset Game", 90, 390);
             
-            g.drawRect(80, 250, 115, 30);
-            g.drawRect(80, 290, 200, 30);
-            g.drawRect(80, 330, 200, 30);
-            g.drawRect(80, 370, 200, 30);
+            g.drawRect(90, 255, 95, 18);
+            g.drawRect(90, 295, 123, 18);
+            g.drawRect(90, 335, 38, 18);
+            g.drawRect(90, 375, 108, 18);
         }
 
         else if (gameState == State.Over) {

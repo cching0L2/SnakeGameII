@@ -21,27 +21,31 @@ public class Menu extends MouseAdapter{
         int YCursor = e.getY();
         
         if(Game.gameState==State.Menu){
-            if(mouseSelect(XCursor, YCursor, 80, 250, 115, 30))
+            if(mouseSelect(XCursor, YCursor, 90, 255, 95, 18)){
+                initializeGame(handler);
                 Game.gameState = State.Game;
+            }
+            else if(mouseSelect(XCursor, YCursor, 90, 335, 38, 18))
+                System.exit(0);
         }
         
         else if(Game.gameState==State.Over){
             if(mouseSelect(XCursor, YCursor, 185, 380, 155, 40))
                 System.exit(0);
             else if(mouseSelect(XCursor, YCursor, 185, 270, 155, 40)){
-                handler.objects.clear();
-                handler.addObject(new Snake(Category.Snake, keyController, handler, hud));
-                handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(Game.GB_WIDTH))*Game.GRID_SIZE
-                        , random.nextInt(Util.pixToGrid(Game.GB_HEIGHT))*Game.GRID_SIZE), Category.Food));
-                keyController.resetInitialDirection(Direction.Right);
-                hud.setLevel(0);
-                hud.setScore(0);
+                initializeGame(handler);
                 Game.gameState = State.Game;
+            }
+            else if(mouseSelect(XCursor, YCursor, 185, 325, 155, 40)){
+                Game.gameState = State.Menu;
             }
         }
         else if(Game.gameState==State.Pause){
             if(mouseSelect(XCursor, YCursor, 185, 355, 155, 40))
                 System.exit(0);
+            else if(mouseSelect(XCursor, YCursor, 185, 295, 155, 40)){
+                Game.gameState = State.Menu;
+            }
         }
     }
     
@@ -65,5 +69,15 @@ public class Menu extends MouseAdapter{
 //            if(mouseSelect(XCursor, YCursor, 80, 250, 115, 30))
 //                System.out.println("hovered over");
 //        }
+    }
+    
+    private void initializeGame(Handler handler){
+        handler.objects.clear();
+        handler.addObject(new Snake(Category.Snake, keyController, handler, hud));
+        handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(Game.GB_WIDTH))*Game.GRID_SIZE
+                , random.nextInt(Util.pixToGrid(Game.GB_HEIGHT))*Game.GRID_SIZE), Category.Food));
+        keyController.resetInitialDirection(Direction.Right);
+        hud.setLevel(0);
+        hud.setScore(0);
     }
 }
