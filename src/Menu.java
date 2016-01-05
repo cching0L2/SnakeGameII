@@ -20,7 +20,12 @@ public class Menu extends MouseAdapter{
         int XCursor = e.getX();
         int YCursor = e.getY();
         
-        if(Game.gameState==State.Over){
+        if(Game.gameState==State.Menu){
+            if(mouseSelect(XCursor, YCursor, 80, 250, 115, 30))
+                Game.gameState = State.Game;
+        }
+        
+        else if(Game.gameState==State.Over){
             if(mouseSelect(XCursor, YCursor, 185, 380, 155, 40))
                 System.exit(0);
             else if(mouseSelect(XCursor, YCursor, 185, 270, 155, 40)){
@@ -47,5 +52,18 @@ public class Menu extends MouseAdapter{
             return false;
         }
         return false;
+    }
+    
+    public void mouseEntered(MouseEvent e) {
+        /**
+         * TODO: revise this method
+         */
+        int XCursor = e.getX();
+        int YCursor = e.getY();
+        
+//        if(Game.gameState==State.Menu){
+//            if(mouseSelect(XCursor, YCursor, 80, 250, 115, 30))
+//                System.out.println("hovered over");
+//        }
     }
 }

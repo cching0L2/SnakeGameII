@@ -139,6 +139,14 @@ public class Snake extends MovingElements {
         return snake.get(0);
     }
     
+    public int getSize(){
+        return snake.size();
+    }
+    
+    public int getInitialSize(){
+        return this.INITIAL_LENGTH;
+    }
+    
     public void clearSnake(){
         snake.clear();
     }
