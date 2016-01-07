@@ -1,5 +1,6 @@
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.Random;
 
 public class Menu extends MouseAdapter{
@@ -69,6 +70,11 @@ public class Menu extends MouseAdapter{
 //            if(mouseSelect(XCursor, YCursor, 80, 250, 115, 30))
 //                System.out.println("hovered over");
 //        }
+    }
+    
+    @Override 
+    public void mouseMoved(MouseEvent e){
+        System.out.println(e.getX());
     }
     
     private void initializeGame(Handler handler){
