@@ -32,6 +32,7 @@ public class Game extends Canvas implements Runnable {
     public static final Color GBBorderColor = new Color(106, 90, 205);
     public static final Color GBButtonColor = UIColor;
     public static final Color PBColor = new Color(140, 140, 140);
+    public static final Color SelectColor = new Color(102, 102, 255);
     
     public static final Font UIFont = new Font("Eurostile", Font.PLAIN, 16);
     public static final Font UIFont12B = new Font("Eurostile", Font.BOLD, 12);
@@ -66,6 +67,7 @@ public class Game extends Canvas implements Runnable {
 
         this.addKeyListener(keyController);
         this.addMouseListener(menu);
+        this.addMouseMotionListener(menu);
     }
 
     public synchronized void start() {
@@ -159,7 +161,6 @@ public class Game extends Canvas implements Runnable {
             progressBar.render(g);
 
         } else if (gameState == State.Menu) {
-            handler.render(g);
             g.setColor(GBBorderColor);
             g.setFont(TitleFont);
             Graphics2D g2d = (Graphics2D) g;
@@ -168,15 +169,43 @@ public class Game extends Canvas implements Runnable {
             
             g.setColor(PBColor);
             g.setFont(UIFont20B);
+            if(menu.getCurrentSelect().equals("New Game")){
+                g.setColor(SelectColor);
+            }
+            else{
+                g.setColor(PBColor);
+            }
             g.drawString("New Game", 90, 270);
+            
+            if(menu.getCurrentSelect().equals("Achievements")){
+                g.setColor(SelectColor);
+            }
+            else{
+                g.setColor(PBColor);
+            }
             g.drawString("Achievements", 90, 310);
+            
+            if(menu.getCurrentSelect().equals("Quit")){
+                g.setColor(SelectColor);
+            }
+            else{
+                g.setColor(PBColor);
+            }
             g.drawString("Quit", 90, 350);
+            
+            if(menu.getCurrentSelect().equals("Reset Game")){
+                g.setColor(SelectColor);
+            }
+            else{
+                g.setColor(PBColor);
+            }
             g.drawString("Reset Game", 90, 390);
             
-            g.drawRect(90, 255, 95, 18);
-            g.drawRect(90, 295, 123, 18);
-            g.drawRect(90, 335, 38, 18);
-            g.drawRect(90, 375, 108, 18);
+//            rectangles for guidance            
+//            g.drawRect(90, 255, 95, 18);
+//            g.drawRect(90, 295, 123, 18);
+//            g.drawRect(90, 335, 38, 18);
+//            g.drawRect(90, 375, 108, 18);
         }
 
         else if (gameState == State.Over) {

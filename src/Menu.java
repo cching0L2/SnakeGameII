@@ -8,6 +8,7 @@ public class Menu extends MouseAdapter{
     KeyController keyController;
     HUD hud;
     Random random;
+    private String currentSelect="";
     
     public Menu(KeyController keyController, HUD hud, Handler handler){
         this.handler = handler;
@@ -59,22 +60,24 @@ public class Menu extends MouseAdapter{
         return false;
     }
     
-    public void mouseEntered(MouseEvent e) {
-        /**
-         * TODO: revise this method
-         */
-        int XCursor = e.getX();
-        int YCursor = e.getY();
-        
-//        if(Game.gameState==State.Menu){
-//            if(mouseSelect(XCursor, YCursor, 80, 250, 115, 30))
-//                System.out.println("hovered over");
-//        }
-    }
-    
     @Override 
     public void mouseMoved(MouseEvent e){
-        System.out.println(e.getX());
+        int XCursor = e.getX();
+        int YCursor = e.getY();
+        if(mouseSelect(XCursor, YCursor, 90, 255, 95, 18)){
+            currentSelect = "New Game";
+        }
+        else if(mouseSelect(XCursor, YCursor, 90, 295, 123, 18)){
+            currentSelect = "Achievements";
+        }
+        else if(mouseSelect(XCursor, YCursor, 90, 335, 38, 18)){
+            currentSelect = "Quit";
+        }
+        else if(mouseSelect(XCursor, YCursor, 90, 375, 108, 18)){
+            currentSelect = "Reset Game";
+        }
+        else
+            currentSelect = " ";
     }
     
     private void initializeGame(Handler handler){
@@ -85,5 +88,9 @@ public class Menu extends MouseAdapter{
         keyController.resetInitialDirection(Direction.Right);
         hud.setLevel(0);
         hud.setScore(0);
+    }
+    
+    public String getCurrentSelect(){
+        return currentSelect;
     }
 }
