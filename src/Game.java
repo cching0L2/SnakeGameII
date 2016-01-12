@@ -60,9 +60,9 @@ public class Game extends Canvas implements Runnable {
         hud = new HUD();
         Snake snake = new Snake(Category.Snake, keyController, handler, hud);
         progressBar = new ProgressBar(snake, hud);
-        handler.addObject(snake);
-        handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(GB_WIDTH)) * GRID_SIZE,
-                random.nextInt(Util.pixToGrid(GB_HEIGHT)) * GRID_SIZE), Category.Food));
+//        handler.addObject(snake);
+//        handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(GB_WIDTH)) * GRID_SIZE,
+//                random.nextInt(Util.pixToGrid(GB_HEIGHT)) * GRID_SIZE), Category.Food));
         menu = new Menu(keyController, hud, handler);
 
         this.addKeyListener(keyController);
@@ -175,7 +175,7 @@ public class Game extends Canvas implements Runnable {
             else{
                 g.setColor(PBColor);
             }
-            g.drawString("New Game", 90, 270);
+            g.drawString("New Game", 220, 270);
             
             if(menu.getCurrentSelect().equals("Achievements")){
                 g.setColor(SelectColor);
@@ -183,7 +183,7 @@ public class Game extends Canvas implements Runnable {
             else{
                 g.setColor(PBColor);
             }
-            g.drawString("Achievements", 90, 310);
+            g.drawString("Achievements", 208, 310);
             
             if(menu.getCurrentSelect().equals("Quit")){
                 g.setColor(SelectColor);
@@ -191,7 +191,7 @@ public class Game extends Canvas implements Runnable {
             else{
                 g.setColor(PBColor);
             }
-            g.drawString("Quit", 90, 350);
+            g.drawString("Quit", 250, 350);
             
             if(menu.getCurrentSelect().equals("Reset Game")){
                 g.setColor(SelectColor);
@@ -199,13 +199,13 @@ public class Game extends Canvas implements Runnable {
             else{
                 g.setColor(PBColor);
             }
-            g.drawString("Reset Game", 90, 390);
+            g.drawString("Reset Game", 218, 390);
             
 //            rectangles for guidance            
-//            g.drawRect(90, 255, 95, 18);
-//            g.drawRect(90, 295, 123, 18);
-//            g.drawRect(90, 335, 38, 18);
-//            g.drawRect(90, 375, 108, 18);
+//            g.drawRect(220, 255, 95, 18);
+//            g.drawRect(208, 295, 123, 18);
+//            g.drawRect(250, 335, 38, 18);
+//            g.drawRect(218, 375, 108, 18);
         }
 
         else if (gameState == State.Over) {

@@ -23,11 +23,11 @@ public class Menu extends MouseAdapter{
         int YCursor = e.getY();
         
         if(Game.gameState==State.Menu){
-            if(mouseSelect(XCursor, YCursor, 90, 255, 95, 18)){
+            if(mouseSelect(XCursor, YCursor, 220, 255, 95, 18)){
                 initializeGame(handler);
                 Game.gameState = State.Game;
             }
-            else if(mouseSelect(XCursor, YCursor, 90, 335, 38, 18))
+            else if(mouseSelect(XCursor, YCursor, 250, 335, 38, 18))
                 System.exit(0);
         }
         
@@ -64,16 +64,16 @@ public class Menu extends MouseAdapter{
     public void mouseMoved(MouseEvent e){
         int XCursor = e.getX();
         int YCursor = e.getY();
-        if(mouseSelect(XCursor, YCursor, 90, 255, 95, 18)){
+        if(mouseSelect(XCursor, YCursor, 220, 255, 95, 18)){
             currentSelect = "New Game";
         }
-        else if(mouseSelect(XCursor, YCursor, 90, 295, 123, 18)){
+        else if(mouseSelect(XCursor, YCursor, 208, 295, 123, 18)){
             currentSelect = "Achievements";
         }
-        else if(mouseSelect(XCursor, YCursor, 90, 335, 38, 18)){
+        else if(mouseSelect(XCursor, YCursor, 250, 335, 38, 18)){
             currentSelect = "Quit";
         }
-        else if(mouseSelect(XCursor, YCursor, 90, 375, 108, 18)){
+        else if(mouseSelect(XCursor, YCursor, 218, 375, 108, 18)){
             currentSelect = "Reset Game";
         }
         else
