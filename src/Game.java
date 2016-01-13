@@ -216,7 +216,7 @@ public class Game extends Canvas implements Runnable {
             g.drawString("You lost with a score of: ", 175, 205);
             g.setColor(GBBorderColor);
             g.setFont(UIFont24);
-            g.drawString(Integer.toString(hud.getScore()), 245, 240);
+            g.drawString(Integer.toString(LevelController.getScore()), 245, 240);
 
             g.setFont(UIFont20B);
             g.setColor(GBButtonColor);

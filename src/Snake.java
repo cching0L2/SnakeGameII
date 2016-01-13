@@ -49,8 +49,6 @@ public class Snake extends MovingElements {
                 Food food = (Food)tempObject;
                 if(Collision.snakeEatFood(this, food)){
                     grow();
-                    hud.setScore(hud.getScore()+1);
-                    hud.setLevel(hud.getScore()/10);
                     food.setEaten(true);
                     handler.removeObject(tempObject);
                     handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(Game.GB_WIDTH))*Game.GRID_SIZE

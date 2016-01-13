@@ -1,16 +1,36 @@
 import java.util.Random;
 
-public class LevelController{
+public class LevelController {
     Handler handler;
     HUD hud;
     Random random;
     
-    public LevelController(Handler handler, HUD hud){
+    public static int score = 0;
+    public static int level = 0;
+    
+
+    public LevelController(Handler handler, HUD hud) {
         this.handler = handler;
         this.hud = hud;
         random = new Random();
     }
     
+    public static int getScore(){
+        return score;
+    }
+    
+    public static void setScore(int score){
+        LevelController.score = score;
+    }
+    
+    public static int getLevel(){
+        return level;
+    }
+    
+    public static void setLevel(int level){
+        LevelController.level = level;
+    }
+
     public int findLevel(int score) {
         // level scheme: 3, 3, 5, 5, 5, 5, 8, 8...
         // get the level corresponding to score
@@ -85,15 +105,15 @@ public class LevelController{
         else
             return false;
     }
-    
-    public void tick(){
-      for (int i = 0; i < handler.objects.size(); i++) {
-      GameElements tempElement = handler.objects.get(i);
-      if (tempElement.getCategory() == Category.Snake) {
-          Snake tempSnake = (Snake) tempElement;
-          hud.setScore(tempSnake.getSize() - tempSnake.getInitialSize()); 
-          hud.setLevel(findLevel(hud.getScore())); 
-      }
-  }
+
+    public void tick() {
+        for (int i = 0; i < handler.objects.size(); i++) {
+            GameElements tempElement = handler.objects.get(i);
+            if (tempElement.getCategory() == Category.Snake) {
+                Snake tempSnake = (Snake) tempElement;
+                score = tempSnake.getSize() - tempSnake.getInitialSize();
+                level = findLevel(score);
+            }
+        }
     }
 }

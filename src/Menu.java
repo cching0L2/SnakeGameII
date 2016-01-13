@@ -86,8 +86,8 @@ public class Menu extends MouseAdapter{
         handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(Game.GB_WIDTH))*Game.GRID_SIZE
                 , random.nextInt(Util.pixToGrid(Game.GB_HEIGHT))*Game.GRID_SIZE), Category.Food));
         keyController.resetInitialDirection(Direction.Right);
-        hud.setLevel(0);
-        hud.setScore(0);
+        LevelController.setLevel(0);
+        LevelController.setScore(0);
     }
     
     public String getCurrentSelect(){

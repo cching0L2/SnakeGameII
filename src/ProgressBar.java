@@ -19,9 +19,10 @@ public class ProgressBar {
     }
 
     public void tick() {
-        percentage = (hud.getScore() - levelController.getLevelMin(hud.getLevel())) / (double) levelController.getScoreToLevelUp(hud.getLevel());
-        difference = levelController.getLevelMin(hud.getLevel() + 1) - hud.getScore();
-        levelUp = levelController.isLevelUp(hud.getScore());
+        percentage = (LevelController.getScore() - levelController.getLevelMin(LevelController.getLevel())) / 
+                (double) levelController.getScoreToLevelUp(LevelController.getLevel());
+        difference = levelController.getLevelMin(LevelController.getLevel() + 1) - LevelController.getScore();
+        levelUp = levelController.isLevelUp(LevelController.getScore());
     }
 
     public void render(Graphics g) {
