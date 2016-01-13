@@ -40,14 +40,13 @@ public class Game extends Canvas implements Runnable {
     public static final Font UIFont24 = new Font("Eurostile", Font.PLAIN, 28);
     public static final Font UIFont40 = new Font("Eurostile", Font.PLAIN, 40);
     public static final Font TitleFont = new Font("Noteworthy", Font.PLAIN, 80);
-
-    private ImageIcon cursorIcon = Util.createImageIcon("cookie image", "image/cookie.gif");
     
     private KeyController keyController;
     private Handler handler;
     private HUD hud;
     private Menu menu;
     private ProgressBar progressBar;
+    private LevelController levelController;
 
     public static State gameState = State.Menu;
 
@@ -58,9 +57,10 @@ public class Game extends Canvas implements Runnable {
         handler = new Handler();
         keyController = new KeyController();
         hud = new HUD();
+        levelController = new LevelController(handler);
         Snake snake = new Snake(Category.Snake, keyController, handler, hud);
-        progressBar = new ProgressBar(snake, hud);
-//        handler.addObject(snake);
+        progressBar = new ProgressBar(hud, levelController);
+        handler.addObject(snake);
 //        handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(GB_WIDTH)) * GRID_SIZE,
 //                random.nextInt(Util.pixToGrid(GB_HEIGHT)) * GRID_SIZE), Category.Food));
         menu = new Menu(keyController, hud, handler);
@@ -103,6 +103,7 @@ public class Game extends Canvas implements Runnable {
 
     private void tick() {
         if (gameState == State.Menu) {
+            //handler.tick();
         }
 
         else if (gameState == State.Game) {
@@ -113,7 +114,7 @@ public class Game extends Canvas implements Runnable {
                     Snake tempSnake = (Snake) tempElement;
                     hud.setScore(tempSnake.getSize() - tempSnake.getInitialSize()); // update
                                                                                     // score
-                    hud.setLevel(progressBar.findLevel(hud.getScore())); // get
+                    hud.setLevel(levelController.findLevel(hud.getScore())); // get
                                                                          // level
                 }
             }
@@ -161,6 +162,7 @@ public class Game extends Canvas implements Runnable {
             progressBar.render(g);
 
         } else if (gameState == State.Menu) {
+            //handler.render(g);
             g.setColor(GBBorderColor);
             g.setFont(TitleFont);
             Graphics2D g2d = (Graphics2D) g;
