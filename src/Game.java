@@ -57,12 +57,10 @@ public class Game extends Canvas implements Runnable {
         handler = new Handler();
         keyController = new KeyController();
         hud = new HUD();
-        levelController = new LevelController(handler);
         Snake snake = new Snake(Category.Snake, keyController, handler, hud);
+        levelController = new LevelController(handler, hud);
         progressBar = new ProgressBar(hud, levelController);
         handler.addObject(snake);
-//        handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(GB_WIDTH)) * GRID_SIZE,
-//                random.nextInt(Util.pixToGrid(GB_HEIGHT)) * GRID_SIZE), Category.Food));
         menu = new Menu(keyController, hud, handler);
 
         this.addKeyListener(keyController);
@@ -103,21 +101,12 @@ public class Game extends Canvas implements Runnable {
 
     private void tick() {
         if (gameState == State.Menu) {
-            //handler.tick();
+            handler.tick();
         }
 
         else if (gameState == State.Game) {
             handler.tick();
-            for (int i = 0; i < handler.objects.size(); i++) {
-                GameElements tempElement = handler.objects.get(i);
-                if (tempElement.getCategory() == Category.Snake) {
-                    Snake tempSnake = (Snake) tempElement;
-                    hud.setScore(tempSnake.getSize() - tempSnake.getInitialSize()); // update
-                                                                                    // score
-                    hud.setLevel(levelController.findLevel(hud.getScore())); // get
-                                                                         // level
-                }
-            }
+            levelController.tick();
             progressBar.tick();
         }
     }
@@ -162,7 +151,6 @@ public class Game extends Canvas implements Runnable {
             progressBar.render(g);
 
         } else if (gameState == State.Menu) {
-            //handler.render(g);
             g.setColor(GBBorderColor);
             g.setFont(TitleFont);
             Graphics2D g2d = (Graphics2D) g;
@@ -202,6 +190,8 @@ public class Game extends Canvas implements Runnable {
                 g.setColor(PBColor);
             }
             g.drawString("Reset Game", 218, 390);
+            
+            handler.render(g);
             
 //            rectangles for guidance            
 //            g.drawRect(220, 255, 95, 18);
