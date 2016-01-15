@@ -34,4 +34,14 @@ public class Collision{
         }
         return true;
     }
+    
+    public static boolean introSnakeHitWall(Snake snake){
+        Rectangle head = snake.getHeadBound();
+        if((int)head.getX()>=-120 && (int)head.getX()<Game.WIDTH+120){
+            if((int)head.getY()>=-120 && (int)head.getY()<Game.HEIGHT+120)
+                return false;
+            return true;
+        }
+        return true;
+    }
 }

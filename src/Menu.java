@@ -82,7 +82,7 @@ public class Menu extends MouseAdapter{
     
     private void initializeGame(Handler handler){
         handler.objects.clear();
-        handler.addObject(new Snake(Category.Snake, keyController, handler, hud));
+        handler.addObject(new Snake(Category.Snake, keyController, handler));
         handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(Game.GB_WIDTH))*Game.GRID_SIZE
                 , random.nextInt(Util.pixToGrid(Game.GB_HEIGHT))*Game.GRID_SIZE), Category.Food));
         keyController.resetInitialDirection(Direction.Right);

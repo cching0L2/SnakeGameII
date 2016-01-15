@@ -1,16 +1,30 @@
 import java.awt.Graphics;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Animation{
+    //animation in introduction
     
-    private List<Position> snake = new LinkedList<Position>();
+    private final int SNAKE_COUNT = 7;
+    
+    Handler handler;
+    KeyController keyController;
+    
+    public Animation(Handler handler, KeyController keyController){
+        this.handler = handler;
+        this.keyController = keyController;
+        
+        for(int i = 0; i<SNAKE_COUNT; i++){
+            handler.addObject(new IntroSnake(Category.Snake, keyController, handler));
+        }
+    }
     
     public void tick(){
-        
+        handler.tick();
+        while(handler.objects.size()<SNAKE_COUNT){ //make sure there are always 20 snakes
+            handler.addObject(new IntroSnake(Category.Snake, keyController, handler));
+        }
     }
     
     public void render(Graphics g){
-        
+        handler.render(g);
     }
 }

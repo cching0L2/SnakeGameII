@@ -7,12 +7,12 @@ import java.util.Random;
 
 public class Snake extends MovingElements {
 
-    private int INITIAL_X = Util.gridToPix(13);
-    private int INITIAL_Y = Util.gridToPix(3);
-    private final int INITIAL_LENGTH = 15;
-    private Direction INITIAL_DIRECTION = Direction.Right;
+    protected int INITIAL_X = Util.gridToPix(13);
+    protected int INITIAL_Y = Util.gridToPix(3);
+    protected final int INITIAL_LENGTH = 15;
+    protected Direction INITIAL_DIRECTION = Direction.Right;
 
-    private List<Position> snake = new LinkedList<Position>();
+    protected List<Position> snake = new LinkedList<Position>();
     private Position lastTailPos = null;
     private Boolean isDead = false;
     private Direction prevDir = INITIAL_DIRECTION;
@@ -20,19 +20,21 @@ public class Snake extends MovingElements {
     private Random random;
     private KeyController controller;
     private Handler handler;
-    private HUD hud;
 
-    public Snake(Category cat, KeyController controller, Handler handler, HUD hud) {
+    public Snake(Category cat, KeyController controller, Handler handler) {
         super(Category.Snake);
         random = new Random();
         this.handler = handler;
         this.controller = controller;
-        this.hud = hud;
+        initializeSnake();
+    }
+
+    protected void initializeSnake(){
         for (int i = 0; i < INITIAL_LENGTH; i++) {
             snake.add(new Position(INITIAL_X - Util.gridToPix(i), INITIAL_Y));
         }
     }
-
+    
     @Override
     public void tick() {
         //motion control 

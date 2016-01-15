@@ -7,6 +7,13 @@ public class Handler{
     public void tick(){
         for(int i=0; i<objects.size(); i++){
             GameElements tempElement = objects.get(i);
+            
+            if(tempElement instanceof Snake){ //remove dead snakes
+                Snake tempSnake = (Snake)tempElement;
+                if(tempSnake.getDead())
+                   removeObject(tempElement);
+                
+            }
             tempElement.tick();
         }
     }

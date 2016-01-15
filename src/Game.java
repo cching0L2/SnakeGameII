@@ -31,6 +31,7 @@ public class Game extends Canvas implements Runnable {
     public static final Color NoticeColor = new Color(153, 204, 255);
     public static final Color GBBorderColor = new Color(106, 90, 205);
     public static final Color GBButtonColor = UIColor;
+    public static final Color StatementColor = new Color(200, 200, 200);
     public static final Color PBColor = new Color(140, 140, 140);
     public static final Color SelectColor = new Color(102, 102, 255);
     
@@ -47,6 +48,7 @@ public class Game extends Canvas implements Runnable {
     private Menu menu;
     private ProgressBar progressBar;
     private LevelController levelController;
+    private Animation animation;
 
     public static State gameState = State.Menu;
 
@@ -57,10 +59,15 @@ public class Game extends Canvas implements Runnable {
         handler = new Handler();
         keyController = new KeyController();
         hud = new HUD();
-        Snake snake = new Snake(Category.Snake, keyController, handler, hud);
+        Snake snake = new Snake(Category.Snake, keyController, handler);
         levelController = new LevelController(handler, hud);
         progressBar = new ProgressBar(hud, levelController);
-        handler.addObject(snake);
+        animation = new Animation(handler, keyController);
+        
+        for(int i = 0; i<20; i++){
+            handler.addObject(new IntroSnake(Category.Snake, keyController, handler));
+        }
+        
         menu = new Menu(keyController, hud, handler);
 
         this.addKeyListener(keyController);
@@ -101,7 +108,7 @@ public class Game extends Canvas implements Runnable {
 
     private void tick() {
         if (gameState == State.Menu) {
-            handler.tick();
+            animation.tick();
         }
 
         else if (gameState == State.Game) {
@@ -151,11 +158,16 @@ public class Game extends Canvas implements Runnable {
             progressBar.render(g);
 
         } else if (gameState == State.Menu) {
+            animation.render(g);
+            
             g.setColor(GBBorderColor);
             g.setFont(TitleFont);
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            g.drawString("SnakeGame II", 50, 110);
+            g.drawString("SnakeGame II", 60, 160);
+            g.setFont(UIFont12B);
+            g.setColor(StatementColor);
+            g.drawString("Designed and made by Camellia Peng.  All rights reserved.", 120, 565);
             
             g.setColor(PBColor);
             g.setFont(UIFont20B);
@@ -190,8 +202,6 @@ public class Game extends Canvas implements Runnable {
                 g.setColor(PBColor);
             }
             g.drawString("Reset Game", 218, 390);
-            
-            handler.render(g);
             
 //            rectangles for guidance            
 //            g.drawRect(220, 255, 95, 18);
