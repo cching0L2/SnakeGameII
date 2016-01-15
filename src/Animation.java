@@ -4,6 +4,7 @@ public class Animation{
     //animation in introduction
     
     private final int SNAKE_COUNT = 7;
+    private final int MAX_SNAKE_COUNT = 10;
     
     Handler handler;
     KeyController keyController;
@@ -19,7 +20,7 @@ public class Animation{
     
     public void tick(){
         handler.tick();
-        while(handler.objects.size()<SNAKE_COUNT){ //make sure there are always 20 snakes
+        while(handler.objects.size()<MAX_SNAKE_COUNT){ //make sure there are always 20 snakes
             handler.addObject(new IntroSnake(Category.Snake, keyController, handler));
         }
     }

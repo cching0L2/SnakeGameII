@@ -8,8 +8,8 @@ public class Handler{
         for(int i=0; i<objects.size(); i++){
             GameElements tempElement = objects.get(i);
             
-            if(tempElement instanceof Snake){ //remove dead snakes
-                Snake tempSnake = (Snake)tempElement;
+            if(tempElement instanceof IntroSnake){ //remove dead snakes
+                IntroSnake tempSnake = (IntroSnake)tempElement;
                 if(tempSnake.getDead())
                    removeObject(tempElement);
                 

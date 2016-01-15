@@ -7,10 +7,8 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 public class Game extends Canvas implements Runnable {
@@ -24,7 +22,6 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private boolean running = false;
     private Timer timer;
-    private Random random;
 
     public static final Color UIColor = new Color(224, 224, 224);
     public static final Color GBColor = new Color(204, 229, 255);
@@ -55,11 +52,9 @@ public class Game extends Canvas implements Runnable {
     public Game() {
         new GameFrame(WIDTH, HEIGHT, "Snake Game Version 2.0", this);
 
-        random = new Random();
         handler = new Handler();
         keyController = new KeyController();
         hud = new HUD();
-        Snake snake = new Snake(Category.Snake, keyController, handler);
         levelController = new LevelController(handler, hud);
         progressBar = new ProgressBar(hud, levelController);
         animation = new Animation(handler, keyController);

@@ -32,6 +32,7 @@ public class Menu extends MouseAdapter{
         }
         
         else if(Game.gameState==State.Over){
+            handler.objects.clear();
             if(mouseSelect(XCursor, YCursor, 185, 380, 155, 40))
                 System.exit(0);
             else if(mouseSelect(XCursor, YCursor, 185, 270, 155, 40)){
