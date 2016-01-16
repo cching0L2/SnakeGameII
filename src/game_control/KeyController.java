@@ -1,5 +1,9 @@
+package game_control;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import game_UI.*;
 
 public class KeyController extends KeyAdapter {
     

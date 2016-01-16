@@ -1,7 +1,11 @@
+package game_elements;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
-
 import javax.swing.ImageIcon;
+
+import game_control.*;
+import game_UI.*;
 
 public class Cookie extends Food{
     
@@ -10,7 +14,7 @@ public class Cookie extends Food{
 
     public Cookie(Position position, Category cat) {
         super(position, cat);
-        cookieImage = Util.createImageIcon("cookie image", "image/cookie.gif");
+        cookieImage = Util.createImageIcon("cookie image", "../image/cookie.gif");
     }
 
     @Override

@@ -1,6 +1,11 @@
+package game_UI;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
+
+import game_elements.*;
+import game_control.*;
 
 public class IntroSnake extends Snake {
     private Random random;
@@ -36,6 +41,7 @@ public class IntroSnake extends Snake {
         // control liveliness
         if (Collision.snakeHitSelf(this) || Collision.introSnakeHitWall(this)) {
             super.setDead(true);
+            Game.gameState = State.Menu;
         }
     }
     

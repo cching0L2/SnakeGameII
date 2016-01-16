@@ -1,4 +1,8 @@
+package game_control;
+
 import java.util.Random;
+import game_UI.*;
+import game_elements.*;
 
 public class LevelController {
     Handler handler;

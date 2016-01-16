@@ -1,3 +1,7 @@
+package game_control;
+
+import game_UI.*;
+
 public class Position{
     private int x;
     private int y;

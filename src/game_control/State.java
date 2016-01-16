@@ -1,3 +1,5 @@
+package game_control;
+
 public enum State{
     Menu,
     Game,

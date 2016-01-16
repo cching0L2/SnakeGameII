@@ -1,3 +1,5 @@
+package game_elements;
+
 import java.awt.Graphics;
 
 public abstract class GameElements{

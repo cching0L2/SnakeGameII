@@ -1,3 +1,5 @@
+package game_UI;
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 

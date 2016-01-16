@@ -1,3 +1,7 @@
+package game_control;
+
+import game_UI.*;
+
 import java.awt.Rectangle;
 import java.util.Random;
 

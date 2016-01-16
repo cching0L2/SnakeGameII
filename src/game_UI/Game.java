@@ -1,3 +1,5 @@
+package game_UI;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
@@ -8,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.util.concurrent.TimeUnit;
+
+import game_elements.*;
+import game_control.*;
 
 import javax.swing.Timer;
 
@@ -41,6 +46,7 @@ public class Game extends Canvas implements Runnable {
     
     private KeyController keyController;
     private Handler handler;
+    private Handler introAnimationHandler;
     private HUD hud;
     private Menu menu;
     private ProgressBar progressBar;
@@ -53,14 +59,15 @@ public class Game extends Canvas implements Runnable {
         new GameFrame(WIDTH, HEIGHT, "Snake Game Version 2.0", this);
 
         handler = new Handler();
+        introAnimationHandler = new Handler();
         keyController = new KeyController();
         hud = new HUD();
         levelController = new LevelController(handler, hud);
         progressBar = new ProgressBar(hud, levelController);
-        animation = new Animation(handler, keyController);
+        animation = new Animation(introAnimationHandler, keyController);
         
         for(int i = 0; i<20; i++){
-            handler.addObject(new IntroSnake(Category.Snake, keyController, handler));
+            introAnimationHandler.addObject(new IntroSnake(Category.Snake, keyController, handler));
         }
         
         menu = new Menu(keyController, hud, handler);

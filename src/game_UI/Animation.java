@@ -1,4 +1,8 @@
+package game_UI;
+
 import java.awt.Graphics;
+import game_elements.*;
+import game_control.*;
 
 public class Animation{
     //animation in introduction

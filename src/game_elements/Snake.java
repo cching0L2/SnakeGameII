@@ -1,9 +1,14 @@
+package game_elements;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+
+import game_UI.*;
+import game_control.*;
 
 public class Snake extends MovingElements {
 
@@ -61,6 +66,8 @@ public class Snake extends MovingElements {
         
         //control liveliness
         if(Collision.snakeHitSelf(this)||Collision.snakeHitWall(this)){
+            System.out.print(this.getClass()+"  ");
+            System.out.println(Collision.snakeHitWall(this));
             Game.gameState = State.Over;
         }
     }

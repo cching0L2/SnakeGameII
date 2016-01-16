@@ -1,5 +1,10 @@
+package game_control;
+
 import java.awt.Graphics;
 import java.util.LinkedList;
+
+import game_UI.*;
+import game_elements.*;
 
 public class Handler{
     public LinkedList<GameElements> objects = new LinkedList<GameElements>();

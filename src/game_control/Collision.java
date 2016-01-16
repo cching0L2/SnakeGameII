@@ -1,5 +1,10 @@
+package game_control;
+
 import java.awt.Rectangle;
 import java.util.ArrayList;
+
+import game_elements.*;
+import game_UI.*;
 
 public class Collision{
     

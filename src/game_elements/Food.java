@@ -1,4 +1,7 @@
+package game_elements;
+
 import java.awt.Rectangle;
+import game_control.*;
 
 public abstract class Food extends GameElements{
     
@@ -18,7 +21,7 @@ public abstract class Food extends GameElements{
         this.position = position;
     }
     
-    protected abstract Rectangle getBound();
+    public abstract Rectangle getBound();
     
     public void setEaten(boolean eaten){
         this.eaten = eaten;
