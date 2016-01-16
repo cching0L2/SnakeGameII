@@ -18,6 +18,16 @@ public class Collision{
         return false;
     }
     
+    public static boolean snakeOpenDoor(Snake snake, Door door){
+        if(door.getCategory()==Category.Door){
+            if(door.getBound().intersects(snake.getHeadBound())){
+                return true;
+            }
+            else return false;
+        }
+        return false;
+    }
+    
     public static boolean snakeHitSelf(Snake snake){
         ArrayList<Rectangle> body = snake.getBodyBound();
         Rectangle head = snake.getHeadBound();

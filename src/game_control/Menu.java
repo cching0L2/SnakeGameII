@@ -93,6 +93,7 @@ public class Menu extends MouseAdapter{
         keyController.resetInitialDirection(Direction.Right);
         LevelController.setLevel(0);
         LevelController.setScore(0);
+        LevelController.clearPrevSnakeLength();
     }
     
     public String getCurrentSelect(){
