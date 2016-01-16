@@ -12,6 +12,8 @@ public class LevelController {
     public static int score = 0;
     public static int level = 0;
     
+    private int[] levelScheme = {0, 3, 6, 9, 11, 16, 21, 26, 34, 42, Integer.MAX_VALUE};
+    
 
     public LevelController(Handler handler, HUD hud) {
         this.handler = handler;
@@ -36,81 +38,33 @@ public class LevelController {
     }
 
     public int findLevel(int score) {
-        // level scheme: 3, 3, 5, 5, 5, 5, 8, 8...
-        // get the level corresponding to score
-        if (score >= 0 && score < 3) // between 0 and 10
-            return 1;
-        else if (score >= 3 && score < 6)
-            return 2;
-        else if (score >= 6 && score < 11)
-            return 3;
-        else if (score >= 11 && score < 16)
-            return 4;
-        else if (score >= 16 && score < 21)
-            return 5;
-        else if (score >= 21 && score < 26)
-            return 6;
-        else if (score >= 26 && score < 34)
-            return 7;
-        else if (score >= 34 && score < 42)
-            return 8;
-        else
-            return -1;
+        int levelAt = 0;
+        
+        while(levelScheme[levelAt]<=score){
+            levelAt++;
+        }
+        
+        return levelAt;
     }
 
     public int getScoreToLevelUp(int level) {
-        switch (level) {
-        case 1:
-            return 3;
-        case 2:
-            return 5;
-        case 3:
-            return 5;
-        case 4:
-            return 5;
-        case 5:
-            return 5;
-        case 6:
-            return 8;
-        case 7:
-            return 8;
-        default:
-            return Integer.MAX_VALUE;
-        }
+        return levelScheme[level]-levelScheme[level-1];
     }
 
     public int getLevelMin(int level) {
-        switch (level) {
-        case 1:
-            return 0;
-        case 2:
-            return 3;
-        case 3:
-            return 6;
-        case 4:
-            return 11;
-        case 5:
-            return 16;
-        case 6:
-            return 21;
-        case 7:
-            return 26;
-        case 8:
-            return 34;
-        default:
-            return Integer.MAX_VALUE;
-        }
+        return levelScheme[level-1];
     }
 
     public boolean isLevelUp(int score) {
-        if (score == 3 || score == 6 || score == 11 || score == 16 || score == 21 || score == 26 || score == 34
-                || score == 42)
-            return true;
-        else
-            return false;
+        //is level up if score equals a level threshold
+        for(int i = 1; i<levelScheme.length; i++){
+            if (levelScheme[i] == score) return true;
+        }
+        return false;
     }
 
     public void tick() {
+        //determines score + level by finding the snake object in handler and evaluating its size
         for (int i = 0; i < handler.objects.size(); i++) {
             GameElements tempElement = handler.objects.get(i);
             if (tempElement.getCategory() == Category.Snake) {

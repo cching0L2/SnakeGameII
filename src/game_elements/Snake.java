@@ -66,8 +66,6 @@ public class Snake extends MovingElements {
         
         //control liveliness
         if(Collision.snakeHitSelf(this)||Collision.snakeHitWall(this)){
-            System.out.print(this.getClass()+"  ");
-            System.out.println(Collision.snakeHitWall(this));
             Game.gameState = State.Over;
         }
     }
