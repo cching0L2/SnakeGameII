@@ -11,7 +11,7 @@ public class LevelController {
 
     public static int score = 0;
     public static int level = 0;
-    private int[] levelScheme = { 0, 3, 6, 9, 11, 16, 21, 26, 34, 42, Integer.MAX_VALUE };
+    private int[] levelScheme = { 0, 5, 10, 16, 24, 35, 48, 65, 85, 105, Integer.MAX_VALUE };
     
     private static int prevSnakeLength;
     private Door randDoor;
