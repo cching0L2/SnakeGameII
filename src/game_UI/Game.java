@@ -63,7 +63,7 @@ public class Game extends Canvas implements Runnable {
         introAnimationHandler = new Handler();
         keyController = new KeyController();
         hud = new HUD();
-        levelController = new LevelController(handler, hud);
+        levelController = new LevelController(handler, hud, keyController);
         progressBar = new ProgressBar(hud, levelController);
         animation = new Animation(introAnimationHandler, keyController);
         
@@ -71,7 +71,7 @@ public class Game extends Canvas implements Runnable {
             introAnimationHandler.addObject(new IntroSnake(Category.Snake, keyController, handler));
         }
         
-        menu = new Menu(keyController, hud, handler);
+        menu = new Menu(levelController, hud, handler);
 
         this.addKeyListener(keyController);
         this.addMouseListener(menu);

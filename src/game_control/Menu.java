@@ -4,19 +4,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-import game_elements.*;
 import game_UI.*;
 
 public class Menu extends MouseAdapter{
     Handler handler;
-    KeyController keyController;
+    LevelController levelController;
     HUD hud;
     Random random;
     private String currentSelect="";
     
-    public Menu(KeyController keyController, HUD hud, Handler handler){
+    public Menu(LevelController levelController, HUD hud, Handler handler){
         this.handler = handler;
-        this.keyController = keyController;
+        this.levelController = levelController;
         this.hud = hud;
         random = new Random();
     }
@@ -28,7 +27,7 @@ public class Menu extends MouseAdapter{
         
         if(Game.gameState==State.Menu){
             if(mouseSelect(XCursor, YCursor, 220, 255, 95, 18)){
-                initializeGame(handler);
+                levelController.initializeGame(handler);
                 Game.gameState = State.Game;
             }
             else if(mouseSelect(XCursor, YCursor, 250, 335, 38, 18))
@@ -40,7 +39,7 @@ public class Menu extends MouseAdapter{
             if(mouseSelect(XCursor, YCursor, 185, 380, 155, 40))
                 System.exit(0);
             else if(mouseSelect(XCursor, YCursor, 185, 270, 155, 40)){
-                initializeGame(handler);
+                levelController.initializeGame(handler);
                 Game.gameState = State.Game;
             }
             else if(mouseSelect(XCursor, YCursor, 185, 325, 155, 40)){
@@ -83,17 +82,6 @@ public class Menu extends MouseAdapter{
         }
         else
             currentSelect = " ";
-    }
-    
-    private void initializeGame(Handler handler){
-        handler.objects.clear();
-        handler.addObject(new Snake(Category.Snake, keyController, handler));
-        handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(Game.GB_WIDTH))*Game.GRID_SIZE
-                , random.nextInt(Util.pixToGrid(Game.GB_HEIGHT))*Game.GRID_SIZE), Category.Food));
-        keyController.resetInitialDirection(Direction.Right);
-        LevelController.setLevel(0);
-        LevelController.setScore(0);
-        LevelController.clearPrevSnakeLength();
     }
     
     public String getCurrentSelect(){

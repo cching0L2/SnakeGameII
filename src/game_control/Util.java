@@ -52,4 +52,9 @@ public class Util {
         default: return Direction.Up;
         }
     }
+    
+    public static Position getRandomPosition(){
+        return null;
+    }
+    
 }
