@@ -50,6 +50,21 @@ public class Collision{
         return true;
     }
     
+    public static boolean snakeHitObstacle(Snake snake, Handler handler){
+        Rectangle head = snake.getHeadBound();
+        System.out.println("snake: "+head);
+        
+        for(Object o: handler.objects){
+            if(o instanceof ObstacleElements){
+                ObstacleElements tempObstacle = (ObstacleElements)o;
+                System.out.println(tempObstacle.getBound());
+                if(tempObstacle.getBound().intersects(head))
+                    return true;
+            }
+        }
+        return false;
+    }
+    
     public static boolean introSnakeHitWall(Snake snake){
         Rectangle head = snake.getHeadBound();
         if((int)head.getX()>=-120 && (int)head.getX()<Game.WIDTH+120){

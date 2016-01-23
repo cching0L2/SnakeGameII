@@ -1,5 +1,6 @@
 package game_elements;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -30,7 +31,7 @@ public class Fence extends ObstacleElements{
     @Override
     public Rectangle getBound() {
         //a fence object occupies one square on the board 
-            return new Rectangle(position.getX()*Game.GRID_SIZE+Game.GB_X, position.getY()*Game.GRID_SIZE+Game.GB_Y, 
+            return new Rectangle(position.getX()*Game.GRID_SIZE, position.getY()*Game.GRID_SIZE, 
                     Game.GRID_SIZE*LENGTH, Game.GRID_SIZE*HEIGHT);
     }
 
@@ -40,12 +41,14 @@ public class Fence extends ObstacleElements{
 
     @Override
     public void render(Graphics g) {
-        if(orientation==Orientation.Horizontal)
-            g.drawImage(fenceImageHorizontal.getImage(), position.getX()*Game.GRID_SIZE+Game.GB_X, position.getY()*Game.GRID_SIZE+Game.GB_Y, 
-                    Game.GRID_SIZE*LENGTH, Game.GRID_SIZE*HEIGHT, null);
-        else
-            g.drawImage(fenceImageVertical.getImage(), position.getX()*Game.GRID_SIZE+Game.GB_X, position.getY()*Game.GRID_SIZE+Game.GB_Y, 
-                    Game.GRID_SIZE*LENGTH, Game.GRID_SIZE*HEIGHT, null);
-    }
+        g.setColor(Color.black);
+        g.drawRect(getBound().x, getBound().y, getBound().width, getBound().height);
+//        if(orientation==Orientation.Horizontal)
+//            g.drawImage(fenceImageHorizontal.getImage(), position.getX()*Game.GRID_SIZE+Game.GB_X, position.getY()*Game.GRID_SIZE+Game.GB_Y, 
+//                    Game.GRID_SIZE*LENGTH, Game.GRID_SIZE*HEIGHT, null);
+//        else
+//            g.drawImage(fenceImageVertical.getImage(), position.getX()*Game.GRID_SIZE+Game.GB_X, position.getY()*Game.GRID_SIZE+Game.GB_Y, 
+//                    Game.GRID_SIZE*LENGTH, Game.GRID_SIZE*HEIGHT, null);
+  }
     
 }
