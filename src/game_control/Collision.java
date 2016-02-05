@@ -52,14 +52,13 @@ public class Collision{
     
     public static boolean snakeHitObstacle(Snake snake, Handler handler){
         Rectangle head = snake.getHeadBound();
-        System.out.println("snake: "+head);
         
         for(Object o: handler.objects){
             if(o instanceof ObstacleElements){
                 ObstacleElements tempObstacle = (ObstacleElements)o;
-                System.out.println(tempObstacle.getBound());
-                if(tempObstacle.getBound().intersects(head))
+                if(tempObstacle.getBound().intersects(head)){
                     return true;
+                }
             }
         }
         return false;

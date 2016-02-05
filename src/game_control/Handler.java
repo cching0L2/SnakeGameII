@@ -2,9 +2,10 @@ package game_control;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
+import java.util.List;
 
-import game_UI.*;
-import game_elements.*;
+import game_UI.IntroSnake;
+import game_elements.GameElements;
 
 public class Handler{
     public LinkedList<GameElements> objects = new LinkedList<GameElements>();
@@ -36,7 +37,19 @@ public class Handler{
         objects.add(ge);
     }
     
+    public void addAllObject(List<GameElements> list_objects){
+        for(GameElements ge:list_objects){
+            objects.add(ge);
+        }
+    }
+    
     public void removeObject(GameElements ge){
         objects.remove(ge);
+    }
+    
+    public void removeAllObject(List<GameElements> list_objects){
+        for(GameElements ge:list_objects){
+            objects.remove(ge);
+        }
     }
 }
