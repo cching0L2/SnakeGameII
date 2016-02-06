@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import game_control.LevelController;
 import game_control.Menu;
@@ -13,6 +14,24 @@ import game_control.Menu;
 public class GameWindows{
     Map<String, Color> COLOR_CHART = Game.getColorChart();
     Map<String, Font> FONT_CHART = Game.getFontChart();
+    
+    public void renderBackground(Graphics g){
+        // draw game board
+        g.setColor(COLOR_CHART.get("GBColor"));
+        g.fillRect(Game.GB_X, Game.GB_Y, Game.GB_WIDTH, Game.GB_HEIGHT);
+
+        // draw game board border
+        g.setColor(COLOR_CHART.get("GBBorderColor"));
+        g.drawRect(Game.GB_X, Game.GB_Y, Game.GB_WIDTH, Game.GB_HEIGHT);
+
+        // draw grid
+        g.setColor(Color.gray);
+        // for (int a = GB_X; a < (GB_WIDTH + GB_X); a += GRID_SIZE) {
+        // for (int b = GB_Y; b < (GB_HEIGHT + GB_Y); b += GRID_SIZE) {
+        // g.drawRect(a, b, GRID_SIZE, GRID_SIZE);
+        // }
+        // }
+    }
     
     public void renderIntroWindow(Graphics g, Menu menu){
         g.setColor(COLOR_CHART.get("GBBorderColor"));
@@ -118,19 +137,22 @@ public class GameWindows{
         g.drawString("Quit", 247, 405);
     }
     
-    public class MenuWindow implements Windows{
-
-        @Override
-        public void render(Graphics g) {
+    public void renderLevelUpWindow(Graphics g, LevelController level_controller){
+        try {
+            TimeUnit.MILLISECONDS.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        
-    }
-    
-    public class GameOverWindow implements Windows{
-
-        @Override
-        public void render(Graphics g) {
-        }
-        
+        g.setColor(COLOR_CHART.get("GBBorderColor"));
+        g.drawRect(90, 220, 350, 100);
+        g.setColor(COLOR_CHART.get("NoticeColor"));
+        g.fillRect(90, 220, 350, 100);
+        g.setColor(COLOR_CHART.get("GBBorderColor"));
+        g.setFont(FONT_CHART.get("UIFont20B"));
+        g.drawString("Congrats!", 220, 260);
+        g.setFont(FONT_CHART.get("UIFont20"));
+        g.drawString("You have cleared the level!", 155, 280);
+        g.setFont(FONT_CHART.get("UIFont12B"));
+        g.drawString("Press SPACE to enter the next level.", 175, 310);
     }
 }

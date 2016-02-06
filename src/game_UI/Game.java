@@ -4,8 +4,6 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
@@ -37,22 +35,6 @@ public class Game extends Canvas implements Runnable {
 
     public static final Map<String, Color> COLOR_CHART = new HashMap<String, Color>();
     public static final Map<String, Font> FONT_CHART = new HashMap<String, Font>();
-    
-    public static final Color UIColor = new Color(224, 224, 224);
-    public static final Color GBColor = new Color(204, 229, 255);
-    public static final Color NoticeColor = new Color(153, 204, 255);
-    public static final Color GBBorderColor = new Color(106, 90, 205);
-    public static final Color GBButtonColor = UIColor;
-    public static final Color StatementColor = new Color(200, 200, 200);
-    public static final Color PBColor = new Color(140, 140, 140);
-    public static final Color SelectColor = new Color(102, 102, 255);
-    
-    public static final Font UIFont = new Font("Eurostile", Font.PLAIN, 16);
-    public static final Font UIFont12B = new Font("Eurostile", Font.BOLD, 12);
-    public static final Font UIFont20B = new Font("Eurostile", Font.BOLD, 20);
-    public static final Font UIFont24 = new Font("Eurostile", Font.PLAIN, 28);
-    public static final Font UIFont40 = new Font("Eurostile", Font.PLAIN, 40);
-    public static final Font TitleFont = new Font("Noteworthy", Font.PLAIN, 80);
     
     private KeyController keyController;
     private Handler handler;
@@ -126,14 +108,19 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick() {
-        if (gameState == State.Menu) {
+        switch(gameState){
+        case Menu:{
             animation.tick();
+            break;
         }
-
-        else if (gameState == State.Game) {
+        case Game:{
             handler.tick();
             levelController.tick();
             progressBar.tick();
+            break;
+        }
+        default:
+            break;
         }
     }
 
@@ -146,94 +133,48 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
 
-        g.setFont(UIFont);
+        g.setFont(FONT_CHART.get("UIFont"));
 
         // background
-        g.setColor(UIColor);
+        g.setColor(COLOR_CHART.get("UIColor"));
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         if (gameState != State.Menu) {
-            // draw game board
-            g.setColor(GBColor);
-            g.fillRect(GB_X, GB_Y, GB_WIDTH, GB_HEIGHT);
-
-            // draw game board border
-            g.setColor(GBBorderColor);
-            g.drawRect(GB_X, GB_Y, GB_WIDTH, GB_HEIGHT);
-
-            // draw grid
-            g.setColor(Color.gray);
-            // for (int a = GB_X; a < (GB_WIDTH + GB_X); a += GRID_SIZE) {
-            // for (int b = GB_Y; b < (GB_HEIGHT + GB_Y); b += GRID_SIZE) {
-            // g.drawRect(a, b, GRID_SIZE, GRID_SIZE);
-            // }
-            // }
+            gameWindows.renderBackground(g);
         }
 
-        // draw snake and game objects
-        if (gameState == State.Game) {
+        switch(gameState){
+        case Game: {
             handler.render(g);
             hud.render(g);
             progressBar.render(g);
-
-        } else if (gameState == State.Menu) {
+            break;
+        } 
+        case Menu: {
             animation.render(g);
-            
-            g.setColor(GBBorderColor);
-            g.setFont(TitleFont);
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            g.drawString("SnakeGame II", 60, 160);
-            g.setFont(UIFont12B);
-            g.setColor(StatementColor);
-            g.drawString("Designed and made by Camellia Peng.  All rights reserved.", 120, 565);
-            
-            g.setColor(PBColor);
-            g.setFont(UIFont20B);
-            if(menu.getCurrentSelect().equals("New Game")){
-                g.setColor(SelectColor);
-            }
-            else{
-                g.setColor(PBColor);
-            }
-            g.drawString("New Game", 220, 270);
-            
-            if(menu.getCurrentSelect().equals("Achievements")){
-                g.setColor(SelectColor);
-            }
-            else{
-                g.setColor(PBColor);
-            }
-            g.drawString("Achievements", 208, 310);
-            
-            if(menu.getCurrentSelect().equals("Quit")){
-                g.setColor(SelectColor);
-            }
-            else{
-                g.setColor(PBColor);
-            }
-            g.drawString("Quit", 250, 350);
-            
-            if(menu.getCurrentSelect().equals("Reset Game")){
-                g.setColor(SelectColor);
-            }
-            else{
-                g.setColor(PBColor);
-            }
-            g.drawString("Reset Game", 218, 390);
+            gameWindows.renderIntroWindow(g, menu);
+            break;
         }
-
-        else if (gameState == State.Over) {
+        case Over: {
             try {
                 TimeUnit.MILLISECONDS.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             gameWindows.renderOverWindow(g, levelController);
+            break;
         }
-
-        else if (gameState == State.Pause) {
+        case Pause: {
             gameWindows.renderPauseWindow(g);
+            break;
+        }
+        case LevelUp:{
+            hud.render(g);
+            gameWindows.renderLevelUpWindow(g, levelController);
+        }
+            break;
+        default:
+            break;
         }
 
         g.dispose();
@@ -254,7 +195,8 @@ public class Game extends Canvas implements Runnable {
       FONT_CHART.put("UIFont12B", new Font("Eurostile", Font.BOLD, 12));
       FONT_CHART.put("UIFont20B", new Font("Eurostile", Font.BOLD, 20));
       FONT_CHART.put("UIFont24", new Font("Eurostile", Font.PLAIN, 28));
-      FONT_CHART.put("UIFont20", new Font("Eurostile", Font.PLAIN, 40));
+      FONT_CHART.put("UIFont20", new Font("Eurostile", Font.PLAIN, 20));
+      FONT_CHART.put("UIFont40", new Font("Eurostile", Font.PLAIN, 40));
       FONT_CHART.put("TitleFont", new Font("Noteworthy", Font.PLAIN, 80));
     }
     

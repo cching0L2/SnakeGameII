@@ -44,8 +44,9 @@ public class KeyController extends KeyAdapter {
                 //space -> pause and unpause game
                 if(Game.gameState == State.Game)
                     Game.gameState = State.Pause;
-                else if (Game.gameState == State.Pause)
+                else if (Game.gameState == State.Pause || Game.gameState == State.LevelUp)
                     Game.gameState = State.Game;
+                
             }
         }
     }

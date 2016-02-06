@@ -36,26 +36,6 @@ public class LevelController {
                 random.nextInt(Game.NUM_GRID_PER_SIDE)*Game.GRID_SIZE), Category.Door);
     }
 
-    public static int getScore() {
-        return score;
-    }
-
-    public static void setScore(int score) {
-        LevelController.score = score;
-    }
-
-    public static int getLevel() {
-        return level;
-    }
-
-    public static void setLevel(int level) {
-        LevelController.level = level;
-    }
-    
-    public static void clearPrevSnakeLength(){
-        prevSnakeLength = 0;
-    }
-
     public int findLevel(int score) {
         int levelAt = 0;
 
@@ -122,23 +102,22 @@ public class LevelController {
     }
 
     public void tick() {
-        int nextLevelScore = getLevelMin(level + 1);
+        int nextLevelScore = getLevelMin(level + 1); //score required to get to the next level 
         Snake tempSnake = null;
         
         for (int i = 0; i < handler.objects.size(); i++) {
             GameElements tempElement = handler.objects.get(i);
             if (tempElement.getCategory() == Category.Snake) {
-                tempSnake = (Snake) tempElement;
+                tempSnake = (Snake) tempElement; //get snake in the game
                 if (prevSnakeLength == 0)
-                    prevSnakeLength = tempSnake.getInitialSize();
+                    prevSnakeLength = tempSnake.getInitialSize(); //get length of snake
             }
         }
 
         //control the appearance and disappearance of doors, level, and score
         if (score == nextLevelScore) { // one score until next level
-            //handler.addObject(randDoor);
             if (Collision.snakeOpenDoor(tempSnake, randDoor)) { //if snake's head touches door 
-                score++; //increment score and level 
+                //only increment level after door has been opened
                 level++;
                 prevSnakeLength = tempSnake.getSize();
                 handler.removeObject(randDoor); //remove door from the game board 
@@ -147,17 +126,37 @@ public class LevelController {
                 
                 randDoor = new Door(new Position(random.nextInt(Game.NUM_GRID_PER_SIDE)*Game.GRID_SIZE, 
                         random.nextInt(Game.NUM_GRID_PER_SIDE)*Game.GRID_SIZE), Category.Door);
+                Game.gameState = State.LevelUp;
                 //create a new random door with different location
-             
-
             }
-        } else {
+        } 
+        else {
             if (tempSnake.getSize() > prevSnakeLength){
                 score++;
                 if(score == nextLevelScore)
                     handler.addObject(randDoor);
-                prevSnakeLength = tempSnake.getSize();
+                prevSnakeLength = tempSnake.getSize(); //update prevSnakeLength 
             }
         }
+    }
+    
+    public static int getScore() {
+        return score;
+    }
+
+    public static void setScore(int score) {
+        LevelController.score = score;
+    }
+
+    public static int getLevel() {
+        return level;
+    }
+
+    public static void setLevel(int level) {
+        LevelController.level = level;
+    }
+    
+    public static void clearPrevSnakeLength(){
+        prevSnakeLength = 0;
     }
 }
