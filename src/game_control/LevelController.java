@@ -100,24 +100,31 @@ public class LevelController {
     private List<GameElements> getLevelObstacles(int level){
         List<GameElements> obstacle = new ArrayList<GameElements>();
         if(level == 0){
-            obstacle.add(new Fence(new Position(9,10), Orientation.Vertical));
+            obstacle.add(new Fence(new Position(20,14), Orientation.Vertical));
+        }
+        else if(level == 1){
+            obstacle.add(new Fence(new Position(8,12), Orientation.Horizontal));
+            obstacle.add(new Fence(new Position(8,28), Orientation.Horizontal));
+            obstacle.add(new Fence(new Position(20,12), Orientation.Horizontal));
+            obstacle.add(new Fence(new Position(20,28), Orientation.Horizontal));
         }
         return obstacle;
     }
     
     private void removeObstacles(Handler handler){
+        List<GameElements> toRemove = new ArrayList<GameElements>();
         for (int i = 0; i<handler.objects.size(); i++){
             GameElements tempElement = handler.objects.get(i);
-            if(tempElement.getCategory()==Category.Obstacle){
-                handler.removeObject(tempElement);
-            }
+            if(tempElement.getCategory()==Category.Obstacle)
+                toRemove.add(tempElement);
         }
+        handler.objects.removeAll(toRemove);
     }
 
     public void tick() {
         int nextLevelScore = getLevelMin(level + 1);
         Snake tempSnake = null;
-
+        
         for (int i = 0; i < handler.objects.size(); i++) {
             GameElements tempElement = handler.objects.get(i);
             if (tempElement.getCategory() == Category.Snake) {
@@ -128,7 +135,7 @@ public class LevelController {
         }
 
         //control the appearance and disappearance of doors, level, and score
-        if (score == nextLevelScore - 1) { // one score until next level
+        if (score == nextLevelScore) { // one score until next level
             //handler.addObject(randDoor);
             if (Collision.snakeOpenDoor(tempSnake, randDoor)) { //if snake's head touches door 
                 score++; //increment score and level 
@@ -147,12 +154,10 @@ public class LevelController {
         } else {
             if (tempSnake.getSize() > prevSnakeLength){
                 score++;
-                if(score == nextLevelScore -1)
+                if(score == nextLevelScore)
                     handler.addObject(randDoor);
                 prevSnakeLength = tempSnake.getSize();
             }
         }
-        
-        //control the obstacles
     }
 }

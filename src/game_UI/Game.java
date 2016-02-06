@@ -9,12 +9,18 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import game_elements.*;
-import game_control.*;
-
 import javax.swing.Timer;
+
+import game_control.Handler;
+import game_control.KeyController;
+import game_control.LevelController;
+import game_control.Menu;
+import game_control.State;
+import game_elements.Category;
 
 public class Game extends Canvas implements Runnable {
 
@@ -29,6 +35,9 @@ public class Game extends Canvas implements Runnable {
     private boolean running = false;
     private Timer timer;
 
+    public static final Map<String, Color> COLOR_CHART = new HashMap<String, Color>();
+    public static final Map<String, Font> FONT_CHART = new HashMap<String, Font>();
+    
     public static final Color UIColor = new Color(224, 224, 224);
     public static final Color GBColor = new Color(204, 229, 255);
     public static final Color NoticeColor = new Color(153, 204, 255);
@@ -53,11 +62,12 @@ public class Game extends Canvas implements Runnable {
     private ProgressBar progressBar;
     private LevelController levelController;
     private Animation animation;
+    
+    private GameWindows gameWindows;
 
     public static State gameState = State.Menu;
 
-    public Game() {
-        new GameFrame(WIDTH, HEIGHT, "Snake Game Version 2.0", this);
+    public Game() throws InterruptedException {
 
         handler = new Handler();
         introAnimationHandler = new Handler();
@@ -65,6 +75,7 @@ public class Game extends Canvas implements Runnable {
         hud = new HUD();
         levelController = new LevelController(handler, hud, keyController);
         progressBar = new ProgressBar(hud, levelController);
+        TimeUnit.SECONDS.sleep(1);
         animation = new Animation(introAnimationHandler, keyController);
         
         for(int i = 0; i<20; i++){
@@ -76,6 +87,11 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(keyController);
         this.addMouseListener(menu);
         this.addMouseMotionListener(menu);
+        
+        initializeColorsFonts();
+        gameWindows = new GameWindows();
+        
+        new GameFrame(WIDTH, HEIGHT, "Snake Game Version 2.0", this);
     }
 
     public synchronized void start() {
@@ -205,12 +221,6 @@ public class Game extends Canvas implements Runnable {
                 g.setColor(PBColor);
             }
             g.drawString("Reset Game", 218, 390);
-            
-//            rectangles for guidance            
-//            g.drawRect(220, 255, 95, 18);
-//            g.drawRect(208, 295, 123, 18);
-//            g.drawRect(250, 335, 38, 18);
-//            g.drawRect(218, 375, 108, 18);
         }
 
         else if (gameState == State.Over) {
@@ -219,69 +229,44 @@ public class Game extends Canvas implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            g.setColor(NoticeColor);
-            g.fillRect(GB_X + (GB_WIDTH - 200) / 2, GB_Y + (GB_HEIGHT - 100) / 4, 200, 280);
-            g.setColor(GBBorderColor);
-            g.drawRect(GB_X + (GB_WIDTH - 200) / 2, GB_Y + (GB_HEIGHT - 100) / 4, 200, 280);
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            g.drawString("Game over...", 175, 185);
-            g.drawString("You lost with a score of: ", 175, 205);
-            g.setColor(GBBorderColor);
-            g.setFont(UIFont24);
-            g.drawString(Integer.toString(LevelController.getScore()), 245, 240);
-
-            g.setFont(UIFont20B);
-            g.setColor(GBButtonColor);
-            g.fillRect(185, 270, 155, 40);
-            g.setColor(GBBorderColor);
-            g.drawRect(185, 270, 155, 40);
-            g.drawString("New Game", 220, 295);
-
-            g.setColor(GBButtonColor);
-            g.fillRect(185, 325, 155, 40);
-            g.setColor(GBBorderColor);
-            g.drawRect(185, 325, 155, 40);
-            g.drawString("Menu", 240, 350);
-
-            g.setColor(GBButtonColor);
-            g.fillRect(185, 380, 155, 40);
-            g.setColor(GBBorderColor);
-            g.drawRect(185, 380, 155, 40);
-            g.drawString("Quit", 247, 405);
+            gameWindows.renderOverWindow(g, levelController);
         }
 
         else if (gameState == State.Pause) {
-            // draw pause state graphics
-            g.setColor(NoticeColor);
-            g.fillRect(GB_X + (GB_WIDTH - 200) / 2, GB_Y + (GB_HEIGHT - 100) / 4, 200, 280);
-            g.setColor(GBBorderColor);
-            g.drawRect(GB_X + (GB_WIDTH - 200) / 2, GB_Y + (GB_HEIGHT - 100) / 4, 200, 280);
-            g.setFont(UIFont);
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            g.drawString("Press SPACE bar to", 185, 195);
-            g.drawString("resume game", 185, 215);
-            g.drawString("or select one of the", 185, 245);
-            g.drawString("following options:", 185, 265);
-            g.setColor(GBButtonColor);
-            g.fillRect(185, 295, 155, 40);
-            g.setColor(GBBorderColor);
-            g.drawRect(185, 295, 155, 40);
-            g.setFont(UIFont20B);
-            g.drawString("Menu", 240, 320);
-            g.setColor(GBButtonColor);
-            g.fillRect(185, 355, 155, 40);
-            g.setColor(GBBorderColor);
-            g.drawRect(185, 355, 155, 40);
-            g.drawString("Quit", 247, 380);
+            gameWindows.renderPauseWindow(g);
         }
 
         g.dispose();
         bs.show();
     }
+    
+    private static void initializeColorsFonts(){
+      COLOR_CHART.put("UIColor", new Color(224, 224, 224));
+      COLOR_CHART.put("GBColor", new Color(204, 229, 255));
+      COLOR_CHART.put("NoticeColor", new Color(153, 204, 255));
+      COLOR_CHART.put("GBBorderColor", new Color(106, 90, 205));
+      COLOR_CHART.put("GBButtonColor", new Color(224, 224, 224));
+      COLOR_CHART.put("StatementColor", new Color(200, 200, 200));
+      COLOR_CHART.put("PBColor", new Color(140, 140, 140));
+      COLOR_CHART.put("SelectColor", new Color(102, 102, 255));
+      
+      FONT_CHART.put("UIFont", new Font("Eurostile", Font.PLAIN, 16));
+      FONT_CHART.put("UIFont12B", new Font("Eurostile", Font.BOLD, 12));
+      FONT_CHART.put("UIFont20B", new Font("Eurostile", Font.BOLD, 20));
+      FONT_CHART.put("UIFont24", new Font("Eurostile", Font.PLAIN, 28));
+      FONT_CHART.put("UIFont20", new Font("Eurostile", Font.PLAIN, 40));
+      FONT_CHART.put("TitleFont", new Font("Noteworthy", Font.PLAIN, 80));
+    }
+    
+    public static Map<String, Color> getColorChart(){
+        return COLOR_CHART;
+    }
+    
+    public static Map<String, Font> getFontChart(){
+        return FONT_CHART;
+    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new Game();
     }
 }

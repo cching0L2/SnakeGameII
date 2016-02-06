@@ -23,10 +23,10 @@ public class Animation{
     }
     
     public void tick(){
-        handler.tick();
         while(handler.objects.size()<MAX_SNAKE_COUNT){ //make sure there are always 20 snakes
             handler.addObject(new IntroSnake(Category.Snake, keyController, handler));
         }
+        handler.tick();
     }
     
     public void render(Graphics g){
