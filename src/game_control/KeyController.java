@@ -41,12 +41,11 @@ public class KeyController extends KeyAdapter {
                 break;
             }
             case KeyEvent.VK_SPACE: {
-                //space -> pause and unpause game
+                //space -> pause and restart game
                 if(Game.gameState == State.Game)
                     Game.gameState = State.Pause;
                 else if (Game.gameState == State.Pause || Game.gameState == State.LevelUp)
                     Game.gameState = State.Game;
-                
             }
         }
     }

@@ -139,6 +139,14 @@ public class Snake extends MovingElements {
             return returnList;
         }
     }
+    
+    public void repositionSnake(){
+        snake.clear();
+        for (int i = 0; i < INITIAL_LENGTH; i++) {
+            snake.add(new Position(INITIAL_X - Util.gridToPix(i), INITIAL_Y));
+        }
+    }
+    
 
     private Position getHeadPosition() {
         return snake.get(0);

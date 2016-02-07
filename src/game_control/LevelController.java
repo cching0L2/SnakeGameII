@@ -119,6 +119,9 @@ public class LevelController {
             if (Collision.snakeOpenDoor(tempSnake, randDoor)) { //if snake's head touches door 
                 //only increment level after door has been opened
                 level++;
+                Game.gameState = State.LevelUp;
+                tempSnake.repositionSnake();
+                keyController.resetInitialDirection(Direction.Right);
                 prevSnakeLength = tempSnake.getSize();
                 handler.removeObject(randDoor); //remove door from the game board 
                 removeObstacles(handler); //remove all obstacles in game 
@@ -126,7 +129,6 @@ public class LevelController {
                 
                 randDoor = new Door(new Position(random.nextInt(Game.NUM_GRID_PER_SIDE)*Game.GRID_SIZE, 
                         random.nextInt(Game.NUM_GRID_PER_SIDE)*Game.GRID_SIZE), Category.Door);
-                Game.gameState = State.LevelUp;
                 //create a new random door with different location
             }
         } 

@@ -171,8 +171,8 @@ public class Game extends Canvas implements Runnable {
         case LevelUp:{
             hud.render(g);
             gameWindows.renderLevelUpWindow(g, levelController);
-        }
             break;
+        }
         default:
             break;
         }
