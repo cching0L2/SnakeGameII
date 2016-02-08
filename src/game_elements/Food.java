@@ -22,12 +22,4 @@ public abstract class Food extends GameElements{
     }
     
     public abstract Rectangle getBound();
-    
-    public void setEaten(boolean eaten){
-        this.eaten = eaten;
-    }
-    
-    public boolean getEaten(){
-        return eaten;
-    }
 }

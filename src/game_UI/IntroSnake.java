@@ -21,7 +21,7 @@ public class IntroSnake extends Snake {
     public void render(Graphics g) {
         g.setColor(randColor);
         for (Position p : snake) {
-            g.drawRect(p.getX(), p.getY(), Game.GRID_SIZE, Game.GRID_SIZE);
+            g.drawRect(p.getX()*Game.GRID_SIZE, p.getY()*Game.GRID_SIZE, Game.GRID_SIZE, Game.GRID_SIZE);
         }
     }
 
@@ -56,29 +56,29 @@ public class IntroSnake extends Snake {
 
         switch (appearDirection) {
         case Up: {
-            initialY = -Game.GRID_SIZE;
-            initialX = random.nextInt(Game.WIDTH);
+            initialY = -1;
+            initialX = random.nextInt(Game.WIDTH/Game.GRID_SIZE);
             orientation = Direction.Up;
             direction = Direction.Up;
             break;
         }
         case Down: {
-            initialY = Game.HEIGHT;
-            initialX = random.nextInt(Game.WIDTH);
+            initialY = Game.HEIGHT/Game.GRID_SIZE;
+            initialX = random.nextInt(Game.WIDTH/Game.GRID_SIZE);
             orientation = Direction.Down;
             direction = Direction.Up;
             break;
         }
         case Right: {
-            initialY = random.nextInt(Game.HEIGHT);
-            initialX = Game.WIDTH; // appears from right
+            initialY = random.nextInt(Game.HEIGHT/Game.GRID_SIZE);
+            initialX = Game.WIDTH/Game.GRID_SIZE; // appears from right
             orientation = Direction.Right;
             direction = Direction.Left;
             break;
         }
         case Left: {
-            initialY = random.nextInt(Game.GB_HEIGHT);
-            initialX = -Game.GRID_SIZE; // appears from left
+            initialY = random.nextInt(Game.GB_HEIGHT/Game.GRID_SIZE);
+            initialX = -1; // appears from left
             orientation = Direction.Left;
             direction = Direction.Right;
             break;

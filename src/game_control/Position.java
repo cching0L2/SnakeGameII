@@ -1,7 +1,5 @@
 package game_control;
 
-import game_UI.*;
-
 public class Position{
     private int x;
     private int y;
@@ -15,21 +13,21 @@ public class Position{
         switch(dir){
         case Up: {
             x = pos.getX();
-            y = pos.getY()-Game.GRID_SIZE;
+            y = pos.getY()-1;
             break;
         }
         case Down: {
             x = pos.getX();
-            y = pos.getY()+Game.GRID_SIZE;
+            y = pos.getY()+1;
             break;
         }
         case Right: {
-            x = pos.getX()+Game.GRID_SIZE;
+            x = pos.getX()+1;
             y = pos.getY();
             break;
         }
         case Left: {
-            x = pos.getX()-Game.GRID_SIZE;
+            x = pos.getX()-1;
             y = pos.getY();
             break;
         }
@@ -58,7 +56,12 @@ public class Position{
         else return false;
     }
     
+    @Override 
+    public int hashCode(){
+        return x*y;
+    }
+    
     public String toString(){
-        return "Position("+Util.pixToGrid(x)+", "+Util.pixToGrid(y)+")";
+        return "Position("+x+", "+y+")";
     }
 }

@@ -1,6 +1,5 @@
 package game_UI;
 
-import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -13,9 +12,6 @@ public class ProgressBar {
 
     private double percentage;
     private int difference;
-    private boolean levelUp = false;
-    private float alpha = 1;
-    private float life = 0.1f;
 
     public ProgressBar(HUD hud, LevelController levelController) {
         this.hud = hud;
@@ -26,7 +22,6 @@ public class ProgressBar {
         percentage = (LevelController.getScore() - levelController.getLevelMin(LevelController.getLevel())) / 
                 (double) levelController.getScoreToLevelUp(LevelController.getLevel());
         difference = levelController.getLevelMin(LevelController.getLevel() + 1) - LevelController.getScore();
-        levelUp = levelController.isLevelUp(LevelController.getScore());
     }
 
     public void render(Graphics g) {

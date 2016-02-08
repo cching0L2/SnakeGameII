@@ -46,6 +46,10 @@ public class Game extends Canvas implements Runnable {
     private Animation animation;
     
     private GameWindows gameWindows;
+    
+    //performance trackers 
+    private long elapsedTime = 0;
+    private long iterationCycle = 0;
 
     public static State gameState = State.Menu;
 
@@ -108,6 +112,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick() {
+        long timeStart = System.nanoTime();
         switch(gameState){
         case Menu:{
             animation.tick();
@@ -122,6 +127,12 @@ public class Game extends Canvas implements Runnable {
         default:
             break;
         }
+        long timeEnd = System.nanoTime();
+        
+        //performance trackers
+        elapsedTime += (timeEnd-timeStart)/10000;
+        iterationCycle++;
+        System.out.println("average tick time: "+elapsedTime/iterationCycle);
     }
 
     private void render() {

@@ -5,15 +5,14 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import game_UI.*;
 import game_control.*;
 
 public class Snake extends MovingElements {
 
-    protected int INITIAL_X = Util.gridToPix(13);
-    protected int INITIAL_Y = Util.gridToPix(3);
+    protected int INITIAL_X = 13;
+    protected int INITIAL_Y = 3;
     protected final int INITIAL_LENGTH = 15;
     protected Direction INITIAL_DIRECTION = Direction.Right;
 
@@ -22,50 +21,38 @@ public class Snake extends MovingElements {
     private Boolean isDead = false;
     private Direction prevDir = INITIAL_DIRECTION;
 
-    private Random random;
     private KeyController controller;
     private Handler handler;
 
     public Snake(Category cat, KeyController controller, Handler handler) {
         super(Category.Snake);
-        random = new Random();
         this.handler = handler;
         this.controller = controller;
         initializeSnake();
     }
 
-    protected void initializeSnake(){
+    protected void initializeSnake() {
         for (int i = 0; i < INITIAL_LENGTH; i++) {
-            snake.add(new Position(INITIAL_X - Util.gridToPix(i), INITIAL_Y));
+            snake.add(new Position(INITIAL_X - i, INITIAL_Y));
         }
     }
-    
+
     @Override
     public void tick() {
-        //motion control 
-        if (controller.getDirection() == null) {
+        // motion control
+
+        if (controller.getDirection() == null)
             move(INITIAL_DIRECTION);
-        } else {
+        else
             move(controller.getDirection());
+
+        // control eating
+        if (Collision.snakeEatFood(this, handler)) {
+            grow();
         }
-        
-        //control eating
-        for(int i=0; i<handler.objects.size(); i++){
-            GameElements tempObject = handler.objects.get(i);
-            if(tempObject.getCategory()==Category.Food){
-                Food food = (Food)tempObject;
-                if(Collision.snakeEatFood(this, food)){
-                    grow();
-                    food.setEaten(true);
-                    handler.removeObject(tempObject);
-                    handler.addObject(new Cookie(new Position(random.nextInt(Util.pixToGrid(Game.GB_WIDTH))*Game.GRID_SIZE
-                            , random.nextInt(Util.pixToGrid(Game.GB_HEIGHT))*Game.GRID_SIZE), Category.Food));
-                }
-            }
-        }
-        
-        //control liveliness
-        if(Collision.snakeHitSelf(this)||Collision.snakeHitWall(this)||Collision.snakeHitObstacle(this, handler)){
+
+        // control liveliness
+        if (Collision.snakeHitSelf(this) || Collision.snakeHitWall(this) || Collision.snakeHitObstacle(this, handler)) {
             Game.gameState = State.Over;
         }
     }
@@ -73,7 +60,7 @@ public class Snake extends MovingElements {
     @Override
     public void render(Graphics g) {
         for (Position p : snake) {
-            g.fillRect(p.getX() + Game.GB_X, p.getY() + Game.GB_Y, Game.GRID_SIZE, Game.GRID_SIZE);
+            g.fillRect(p.getX()*Game.GRID_SIZE + Game.GB_X, p.getY()*Game.GRID_SIZE + Game.GB_Y, Game.GRID_SIZE, Game.GRID_SIZE);
         }
     }
 
@@ -86,16 +73,16 @@ public class Snake extends MovingElements {
         if (snake.size() > 1) {
             firstSeg = snake.get(1);
 
-            if (firstSeg.getX() == head.getX() && (firstSeg.getY() - head.getY()) == Util.gridToPix(-1))
+            if (firstSeg.getX() == head.getX() && (firstSeg.getY() - head.getY()) == -1)
                 backDir = Direction.Up;
 
-            else if (firstSeg.getX() == head.getX() && (firstSeg.getY() - head.getY()) == Util.gridToPix(1))
+            else if (firstSeg.getX() == head.getX() && (firstSeg.getY() - head.getY()) == 1)
                 backDir = Direction.Down;
 
-            else if (firstSeg.getY() == head.getY() && (firstSeg.getX() - head.getX()) == Util.gridToPix(1))
+            else if (firstSeg.getY() == head.getY() && (firstSeg.getX() - head.getX()) == 1)
                 backDir = Direction.Right;
 
-            else if (firstSeg.getY() == head.getY() && (firstSeg.getX() - head.getX()) == Util.gridToPix(-1))
+            else if (firstSeg.getY() == head.getY() && (firstSeg.getX() - head.getX()) == -1)
                 backDir = Direction.Left;
         }
         Position newLoc = null;
@@ -122,45 +109,51 @@ public class Snake extends MovingElements {
     public boolean getDead() {
         return isDead;
     }
-    
-    public Rectangle getHeadBound(){
+
+    public Rectangle getHeadBound() {
         Position head = getHeadPosition();
-        return new Rectangle(head.getX(), head.getY(), Game.GRID_SIZE, Game.GRID_SIZE);
+        return new Rectangle(head.getX(), head.getY(), 1, 1);
     }
-    
-    public ArrayList<Rectangle> getBodyBound(){
+
+    public ArrayList<Rectangle> getBodyBound() {
         ArrayList<Rectangle> returnList = new ArrayList<Rectangle>();
-        if(snake.size()<=1) return returnList;
-        else{
-            for(int i=1; i<snake.size(); i++){
+        if (snake.size() <= 1)
+            return returnList;
+        else {
+            for (int i = 1; i < snake.size(); i++) {
                 Position p = snake.get(i);
-                returnList.add(new Rectangle(p.getX(), p.getY(), Game.GRID_SIZE, Game.GRID_SIZE));
+                returnList.add(new Rectangle(p.getX(), p.getY(), 1,1));
             }
             return returnList;
         }
     }
-    
-    public void repositionSnake(){
+
+    public void repositionSnake() {
         snake.clear();
         for (int i = 0; i < INITIAL_LENGTH; i++) {
-            snake.add(new Position(INITIAL_X - Util.gridToPix(i), INITIAL_Y));
+            snake.add(new Position(INITIAL_X - i, INITIAL_Y));
         }
     }
-    
 
     private Position getHeadPosition() {
         return snake.get(0);
     }
-    
-    public int getSize(){
+
+    public int getSize() {
         return snake.size();
     }
-    
-    public int getInitialSize(){
+
+    public int getInitialSize() {
         return this.INITIAL_LENGTH;
     }
     
-    public void clearSnake(){
+    public List<Position> getPositions(){
+        List<Position> returnList = new ArrayList<Position>();
+        returnList.addAll(snake);
+        return returnList;
+    }
+
+    public void clearSnake() {
         snake.clear();
     }
 }

@@ -1,11 +1,11 @@
 package game_control;
 
-import game_UI.*;
-
 import java.awt.Rectangle;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+
+import game_UI.Game;
 
 public class Util {
     
@@ -61,7 +61,7 @@ public class Util {
      * @return a position on the game board that is unoccupied 
      */
     public static Position getRandomPosition(Handler handler){
-        
+        /* TO BE IMPLEMENTED*/
         return null;
     }
     

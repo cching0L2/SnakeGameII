@@ -2,6 +2,8 @@ package game_elements;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 
@@ -31,8 +33,18 @@ public class Fountain extends ObstacleElements{
 
     @Override
     public Rectangle getBound() {
-        return new Rectangle(position.getX()*Game.GRID_SIZE, position.getY()*Game.GRID_SIZE, 
-                LENGTH*Game.GRID_SIZE, HEIGHT*Game.GRID_SIZE);
+        return new Rectangle(position.getX(), position.getY(), LENGTH, HEIGHT);
+    }
+
+    @Override
+    public List<Position> getPositions() {
+        List<Position> returnList = new ArrayList<Position>();
+            for(int x=0; x<LENGTH; x++){
+                for(int y=0; y<HEIGHT; y++)
+                    returnList.add(new Position(position.getX()+x, position.getY()));
+            }
+
+        return returnList;
     }
     
 }
