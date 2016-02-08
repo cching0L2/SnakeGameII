@@ -26,11 +26,11 @@ public class GameWindows{
 
         // draw grid
         g.setColor(Color.gray);
-        // for (int a = GB_X; a < (GB_WIDTH + GB_X); a += GRID_SIZE) {
-        // for (int b = GB_Y; b < (GB_HEIGHT + GB_Y); b += GRID_SIZE) {
-        // g.drawRect(a, b, GRID_SIZE, GRID_SIZE);
-        // }
-        // }
+//         for (int a = Game.GB_X; a < (Game.GB_WIDTH + Game.GB_X); a += Game.GRID_SIZE) {
+//         for (int b = Game.GB_Y; b < (Game.GB_HEIGHT + Game.GB_Y); b += Game.GRID_SIZE) {
+//         g.drawRect(a, b, Game.GRID_SIZE, Game.GRID_SIZE);
+//         }
+//         }
     }
     
     public void renderIntroWindow(Graphics g, Menu menu){

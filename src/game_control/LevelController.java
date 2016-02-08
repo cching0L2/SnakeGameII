@@ -6,13 +6,7 @@ import java.util.Random;
 
 import game_UI.Game;
 import game_UI.HUD;
-import game_elements.Category;
-import game_elements.Cookie;
-import game_elements.Door;
-import game_elements.Fence;
-import game_elements.GameElements;
-import game_elements.Orientation;
-import game_elements.Snake;
+import game_elements.*;
 
 public class LevelController {
     Handler handler;
@@ -79,15 +73,26 @@ public class LevelController {
     
     private List<GameElements> getLevelObstacles(int level){
         List<GameElements> obstacle = new ArrayList<GameElements>();
-        if(level == 0){
-            obstacle.add(new Fence(new Position(20,14), Orientation.Vertical));
+        switch(level){
+        case 0:{
+            //obstacle.add(new Fence(new Position(20,14), Orientation.Vertical));
+//            obstacle.add(new Bush(new Position(18,18)));
+//            obstacle.add(new Bush(new Position(18,19)));
+//            obstacle.add(new Bush(new Position(19,19)));
+//            obstacle.add(new Bush(new Position(19,18)));
+            obstacle.add(new Fountain(new Position(19,18)));
+            break;
         }
-        else if(level == 1){
+        case 1:{
             obstacle.add(new Fence(new Position(8,12), Orientation.Horizontal));
             obstacle.add(new Fence(new Position(8,28), Orientation.Horizontal));
             obstacle.add(new Fence(new Position(20,12), Orientation.Horizontal));
             obstacle.add(new Fence(new Position(20,28), Orientation.Horizontal));
+            break;
         }
+        default: break;
+        }
+        
         return obstacle;
     }
     

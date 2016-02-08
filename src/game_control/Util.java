@@ -53,7 +53,15 @@ public class Util {
         }
     }
     
-    public static Position getRandomPosition(){
+    /**
+     * 
+     * get a random position on the game board that is not taken by any other game elements
+     * 
+     * @param none 
+     * @return a position on the game board that is unoccupied 
+     */
+    public static Position getRandomPosition(Handler handler){
+        
         return null;
     }
     

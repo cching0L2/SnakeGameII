@@ -1,6 +1,5 @@
 package game_elements;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -41,8 +40,6 @@ public class Fence extends ObstacleElements{
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.black);
-        //g.drawRect(getBound().x+Game.GB_X, getBound().y+Game.GB_Y, getBound().width, getBound().height); //bound for testing
         if(orientation==Orientation.Horizontal)
             g.drawImage(fenceImageHorizontal.getImage(), position.getX()*Game.GRID_SIZE+Game.GB_X, position.getY()*Game.GRID_SIZE+Game.GB_Y, 
                     Game.GRID_SIZE*LENGTH, Game.GRID_SIZE*HEIGHT, null);
