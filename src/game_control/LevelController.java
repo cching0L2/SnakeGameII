@@ -76,10 +76,10 @@ public class LevelController {
         switch(level){
         case 0:{
             //obstacle.add(new Fence(new Position(20,14), Orientation.Vertical));
-//            obstacle.add(new Bush(new Position(18,18)));
-//            obstacle.add(new Bush(new Position(18,19)));
-//            obstacle.add(new Bush(new Position(19,19)));
-//            obstacle.add(new Bush(new Position(19,18)));
+            for(int x = 18; x<23; x++){
+                for(int y = 17; y<22; y++)
+                obstacle.add(new Bush(new Position(x, y)));
+            }
             obstacle.add(new Fountain(new Position(19,18)));
             break;
         }
