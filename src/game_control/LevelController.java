@@ -84,10 +84,11 @@ public class LevelController {
             break;
         }
         case 1:{
-            obstacle.add(new Fence(new Position(8,12), Orientation.Horizontal));
-            obstacle.add(new Fence(new Position(8,28), Orientation.Horizontal));
-            obstacle.add(new Fence(new Position(20,12), Orientation.Horizontal));
-            obstacle.add(new Fence(new Position(20,28), Orientation.Horizontal));
+            obstacle.add(new Fence(new Position(8,19), Orientation.Horizontal));
+            obstacle.add(new Fence(new Position(21,19), Orientation.Horizontal));
+            obstacle.add(new Fence(new Position(20,7), Orientation.Vertical));
+            obstacle.add(new Fence(new Position(20,20), Orientation.Vertical));
+            obstacle.add(new Bush(new Position(20,19)));
             break;
         }
         default: break;
