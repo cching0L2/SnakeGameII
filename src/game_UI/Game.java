@@ -132,7 +132,7 @@ public class Game extends Canvas implements Runnable {
         //performance trackers
         elapsedTime += (timeEnd-timeStart)/10000;
         iterationCycle++;
-        System.out.println("average tick time: "+elapsedTime/iterationCycle);
+        //System.out.println("average tick time: "+elapsedTime/iterationCycle);
     }
 
     private void render() {

@@ -70,21 +70,20 @@ public class Snake extends MovingElements {
         Position firstSeg = null;
         Direction backDir = null;
 
-        if (snake.size() > 1) {
-            firstSeg = snake.get(1);
+        firstSeg = snake.get(1);
 
-            if (firstSeg.getX() == head.getX() && (firstSeg.getY() - head.getY()) == -1)
-                backDir = Direction.Up;
+        if (firstSeg.getX() == head.getX() && (firstSeg.getY() - head.getY()) == -1)
+            backDir = Direction.Up;
 
-            else if (firstSeg.getX() == head.getX() && (firstSeg.getY() - head.getY()) == 1)
-                backDir = Direction.Down;
+        else if (firstSeg.getX() == head.getX() && (firstSeg.getY() - head.getY()) == 1)
+            backDir = Direction.Down;
 
-            else if (firstSeg.getY() == head.getY() && (firstSeg.getX() - head.getX()) == 1)
-                backDir = Direction.Right;
+        else if (firstSeg.getY() == head.getY() && (firstSeg.getX() - head.getX()) == 1)
+            backDir = Direction.Right;
 
-            else if (firstSeg.getY() == head.getY() && (firstSeg.getX() - head.getX()) == -1)
-                backDir = Direction.Left;
-        }
+        else if (firstSeg.getY() == head.getY() && (firstSeg.getX() - head.getX()) == -1)
+            backDir = Direction.Left;
+            
         Position newLoc = null;
         Position prevHead = getHeadPosition();
         if (dir != backDir) {
