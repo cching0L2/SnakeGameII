@@ -26,8 +26,7 @@ public class LevelController {
         this.hud = hud;
         this.keyController = keyController;
         random = new Random();
-        randDoor = new Door(new Position(random.nextInt(Game.NUM_GRID_PER_SIDE), 
-                random.nextInt(Game.NUM_GRID_PER_SIDE)), Category.Door);
+        randDoor = new Door(Util.getRandomPosition(handler), Category.Door);
     }
 
     public int findLevel(int score) {
@@ -62,8 +61,7 @@ public class LevelController {
     public void initializeGame(Handler handler){
         handler.objects.clear();
         handler.addObject(new Snake(Category.Snake, keyController, handler));
-        handler.addObject(new Cookie(new Position(random.nextInt(Game.GB_WIDTH/Game.GRID_SIZE)
-                , random.nextInt(Game.GB_HEIGHT/Game.GRID_SIZE)), Category.Food));
+        handler.addObject(new Cookie(Util.getRandomPosition(handler), Category.Food));
         handler.addAllObject(getLevelObstacles(0)); //add obstacles that belong to the first level 
         keyController.resetInitialDirection(Direction.Right);
         LevelController.setLevel(0);
@@ -133,8 +131,7 @@ public class LevelController {
                 removeObstacles(handler); //remove all obstacles in game 
                 handler.addAllObject(getLevelObstacles(level)); //add obstacles that belong to the new level 
                 
-                randDoor = new Door(new Position(random.nextInt(Game.NUM_GRID_PER_SIDE), 
-                        random.nextInt(Game.NUM_GRID_PER_SIDE)), Category.Door);
+                randDoor = new Door(Util.getRandomPosition(handler), Category.Door);
                 //create a new random door with different location
             }
         } 

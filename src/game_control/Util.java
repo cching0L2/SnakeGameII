@@ -1,11 +1,14 @@
 package game_control;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 
 import game_UI.Game;
+import game_elements.GameElements;
 
 public class Util {
     
@@ -61,8 +64,20 @@ public class Util {
      * @return a position on the game board that is unoccupied 
      */
     public static Position getRandomPosition(Handler handler){
-        /* TO BE IMPLEMENTED*/
-        return null;
+        Random random = new Random();
+        int GRID_PER_SIZE = Game.GB_WIDTH/Game.GRID_SIZE;
+        List<Position> takenPosition = new ArrayList<Position>();
+        
+        for(GameElements ge : handler.objects){
+            takenPosition.addAll(ge.getPositions());
+        }
+        
+        Position randPosition;
+        do{
+            randPosition = new Position(random.nextInt(GRID_PER_SIZE), random.nextInt(GRID_PER_SIZE));
+        }while(takenPosition.contains(randPosition));
+        
+        return randPosition;
     }
     
 }
