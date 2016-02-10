@@ -24,8 +24,7 @@ public class Collision {
                 Food food = (Food) tempObject;
                 if (food.getBound().intersects(snake.getHeadBound())) {
                     handler.removeObject(tempObject);
-                    handler.addObject(new Cookie(new Position(random.nextInt(Game.GB_WIDTH / Game.GRID_SIZE),
-                            random.nextInt(Game.GB_HEIGHT / Game.GRID_SIZE)), Category.Food));
+                    handler.addObject(new Cookie(Util.getRandomPosition(handler), Category.Food));
                     return true;
                 }
             }

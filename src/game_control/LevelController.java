@@ -73,7 +73,6 @@ public class LevelController {
         List<GameElements> obstacle = new ArrayList<GameElements>();
         switch(level){
         case 0:{
-            //obstacle.add(new Fence(new Position(20,14), Orientation.Vertical));
             for(int x = 18; x<23; x++){
                 for(int y = 17; y<22; y++)
                 obstacle.add(new Bush(new Position(x, y)));
@@ -87,6 +86,15 @@ public class LevelController {
             obstacle.add(new Fence(new Position(20,7), Orientation.Vertical));
             obstacle.add(new Fence(new Position(20,20), Orientation.Vertical));
             obstacle.add(new Bush(new Position(20,19)));
+            break;
+        }
+        case 2:{
+            obstacle.add(new Fence(new Position(7,19), Orientation.Horizontal));
+            obstacle.add(new Fence(new Position(22,19), Orientation.Horizontal));
+            for(int x = 7; x<34; x++){
+                obstacle.add(new Bush(new Position(x, 20)));
+            }
+            obstacle.add(new Fountain(new Position(19,18)));
             break;
         }
         default: break;

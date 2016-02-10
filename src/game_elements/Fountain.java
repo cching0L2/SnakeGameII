@@ -41,7 +41,7 @@ public class Fountain extends ObstacleElements{
         List<Position> returnList = new ArrayList<Position>();
             for(int x=0; x<LENGTH; x++){
                 for(int y=0; y<HEIGHT; y++)
-                    returnList.add(new Position(position.getX()+x, position.getY()));
+                    returnList.add(new Position(position.getX()+x, position.getY()+y));
             }
 
         return returnList;

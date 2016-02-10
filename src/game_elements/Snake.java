@@ -40,7 +40,6 @@ public class Snake extends MovingElements {
     @Override
     public void tick() {
         // motion control
-
         if (controller.getDirection() == null)
             move(INITIAL_DIRECTION);
         else
