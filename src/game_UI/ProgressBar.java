@@ -1,8 +1,6 @@
 package game_UI;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 
 import game_control.LevelController;
 
@@ -30,8 +28,6 @@ public class ProgressBar {
         g.setColor(Game.COLOR_CHART.get("GBBorderColor"));
         g.drawRect(Game.GB_X + 165, 10, 315, 40);
         g.setFont(Game.FONT_CHART.get("UIFont12B"));
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         // grammar issue
         if (difference == 1)
@@ -42,22 +38,5 @@ public class ProgressBar {
         g.setColor(Game.COLOR_CHART.get("PBColor"));
         g.drawRect(Game.GB_X + 180, 30, 283, 12);
         g.fillRect(Game.GB_X + 180, 30, (int) (283 * percentage), 12);
-
-//        if (levelUp) {
-//            g2d.setComposite(makeTransparent(alpha));
-//            g.setColor(Game.COLOR_CHART.get("GBBorderColor"));
-//            g.setFont(Game.FONT_CHART.get("UIFont40"));
-//            g.drawString("Level Up!", 190, 280);
-//            g2d.setComposite(makeTransparent(1));
-//            if (alpha >= life)
-//                alpha -= (life - 0.01);
-//        } else {
-//            alpha = 1;
-//        }
     }
-
-//    private AlphaComposite makeTransparent(float alpha) {
-//        int type = AlphaComposite.SRC_OVER;
-//        return AlphaComposite.getInstance(type, alpha);
-//    }
 }

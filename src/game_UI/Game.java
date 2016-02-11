@@ -46,7 +46,6 @@ public class Game extends Canvas implements Runnable {
     private Animation animation;
     
     private GameWindows gameWindows;
-    private LevelWindows levelWindows;
     
     //performance trackers 
 //    private long elapsedTime = 0;
@@ -77,7 +76,6 @@ public class Game extends Canvas implements Runnable {
         
         initializeColorsFonts();
         gameWindows = new GameWindows();
-        levelWindows = new LevelWindows();
         
         new GameFrame(WIDTH, HEIGHT, "Snake Game Version 2.0", this);
     }

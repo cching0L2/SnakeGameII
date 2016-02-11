@@ -19,16 +19,15 @@ public class LevelWindows{
             e.printStackTrace();
         }
         g.setColor(COLOR_CHART.get("NoticeColor"));
-        g.fillRect(90, 140, 350, 300);
+        g.fillRect(110, 140, 310, 300);
         g.setColor(COLOR_CHART.get("GBBorderColor"));
-        g.drawRect(90, 140, 350, 300);
+        g.drawRect(110, 140, 310, 300);
         g.setFont(FONT_CHART.get("UIFont24"));
         g.drawString("Level "+level, 225, 180);
         g.setFont(FONT_CHART.get("UIFont12B"));
         g.drawString("Eat food to earn points.  When enough points are earned,", 120, 210);
         g.drawString("Go through door to enter the next level.", 120, 230);
         g.setFont(FONT_CHART.get("UIFont12B"));
-        g.drawString("New Obstacles: ", 120, 290);
         g.drawImage(Fountain.getImage().getImage(), 210, 320, Fountain.getImage().getIconWidth(), 
                 Fountain.getImage().getIconHeight(), null);
         g.drawImage(Bush.getImage().getImage(), 310, 330, Bush.getImage().getIconWidth(), 
@@ -37,7 +36,8 @@ public class LevelWindows{
         
         g.drawImage(Door.getImage().getImage(), 340, 250, Game.GRID_SIZE, Game.GRID_SIZE, null); 
         
-        g.setColor(COLOR_CHART.get("noticeColor"));
+        g.setColor(Color.DARK_GRAY);
+        g.drawString("New Obstacles: ", 120, 300);
         g.drawString("FOUNTAIN", 200, 372);
         g.drawString("BUSH", 307, 372);
         

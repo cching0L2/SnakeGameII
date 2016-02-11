@@ -53,7 +53,7 @@ public class Snake extends MovingElements {
 
         // control liveliness
         if (Collision.snakeHitSelf(this) || Collision.snakeHitWall(this) || Collision.snakeHitObstacle(this, handler)) {
-            Game.gameState = State.LevelUp;
+            Game.gameState = State.Over;
         }
     }
 
