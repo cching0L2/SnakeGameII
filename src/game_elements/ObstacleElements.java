@@ -17,5 +17,5 @@ public abstract  class ObstacleElements extends GameElements{
     public abstract void render(Graphics g);
     
     public abstract Rectangle getBound();
-   
+    
 }

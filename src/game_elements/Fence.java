@@ -14,8 +14,8 @@ import game_control.Util;
 public class Fence extends ObstacleElements{
 
     Position position;
-    ImageIcon fenceImageHorizontal = Util.createImageIcon("fence", "../image/fenceh.gif");
-    ImageIcon fenceImageVertical = Util.createImageIcon("fence", "../image/fencev.gif");
+    static ImageIcon fenceImageHorizontal = Util.createImageIcon("fence", "../image/fenceh.gif");
+    static ImageIcon fenceImageVertical = Util.createImageIcon("fence", "../image/fencev.gif");
     
     final int HEIGHT;
     final int LENGTH;
@@ -58,6 +58,10 @@ public class Fence extends ObstacleElements{
                     returnList.add(new Position(position.getX()+x, position.getY()+y));
             }
         return returnList;
+    }
+
+    public static ImageIcon getImage() {
+        return fenceImageHorizontal;
     }
     
 }

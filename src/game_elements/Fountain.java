@@ -15,7 +15,7 @@ public class Fountain extends ObstacleElements{
 
     Position position;
     int HEIGHT = 3, LENGTH = 3;
-    ImageIcon fountainImage = Util.createImageIcon("fountain", "../image/fountain.gif");
+    static ImageIcon fountainImage = Util.createImageIcon("fountain", "../image/fountain.gif");
     
     public Fountain(Position position){
         this.position = position;
@@ -45,6 +45,10 @@ public class Fountain extends ObstacleElements{
             }
 
         return returnList;
+    }
+
+    public static ImageIcon getImage() {
+        return fountainImage;
     }
     
 }

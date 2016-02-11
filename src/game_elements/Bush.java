@@ -15,7 +15,7 @@ public class Bush extends ObstacleElements{
     
     Position position;
     int HEIGHT = 1, LENGTH = 1;
-    ImageIcon bushImage = Util.createImageIcon("bush", "../image/bush.gif");
+    static ImageIcon bushImage = Util.createImageIcon("bush", "../image/bush.gif");
 
     public Bush(Position position){
         this.position = position;
@@ -45,6 +45,10 @@ public class Bush extends ObstacleElements{
         }
 
     return returnList;
+    }
+
+    public static ImageIcon getImage() {
+        return bushImage;
     }
     
 }
