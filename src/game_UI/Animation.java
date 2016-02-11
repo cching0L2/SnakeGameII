@@ -8,7 +8,7 @@ public class Animation{
     //animation in introduction
     
     private final int SNAKE_COUNT = 7;
-    private final int MAX_SNAKE_COUNT = 10;
+    private final int MAX_SNAKE_COUNT = 20;
     
     Handler handler;
     KeyController keyController;
