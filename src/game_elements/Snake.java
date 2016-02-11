@@ -1,5 +1,6 @@
 package game_elements;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public class Snake extends MovingElements {
 
     @Override
     public void render(Graphics g) {
+        g.setColor(Color.gray);
         for (Position p : snake) {
             g.fillRect(p.getX()*Game.GRID_SIZE + Game.GB_X, p.getY()*Game.GRID_SIZE + Game.GB_Y, Game.GRID_SIZE, Game.GRID_SIZE);
         }

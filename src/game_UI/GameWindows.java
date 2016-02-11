@@ -91,16 +91,15 @@ public class GameWindows{
         g.drawString("resume game", 185, 215);
         g.drawString("or select one of the", 185, 245);
         g.drawString("following options:", 185, 265);
+        
         g.setColor(COLOR_CHART.get("GBButtonColor"));
         g.fillRect(185, 295, 155, 40);
-        g.setColor(COLOR_CHART.get("GBBorderColor"));
-        g.drawRect(185, 295, 155, 40);
-        g.setFont(FONT_CHART.get("UIFont20B"));
-        g.drawString("Menu", 240, 320);
-        g.setColor(COLOR_CHART.get("GBButtonColor"));
         g.fillRect(185, 355, 155, 40);
         g.setColor(COLOR_CHART.get("GBBorderColor"));
+        g.drawRect(185, 295, 155, 40);
         g.drawRect(185, 355, 155, 40);
+        g.setFont(FONT_CHART.get("UIFont20B"));
+        g.drawString("Menu", 240, 320);
         g.drawString("Quit", 247, 380);
     }
     

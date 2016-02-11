@@ -13,7 +13,7 @@ import game_control.Util;
 
 
 public class Door extends GameElements{
-    ImageIcon doorImage;
+    static ImageIcon doorImage;
     Position position;
     int HEIGHT = 1, LENGTH = 1;
     
@@ -42,5 +42,9 @@ public class Door extends GameElements{
         List<Position> returnList = new ArrayList<Position>();
         returnList.add(position);
         return returnList;
+    }
+    
+    public static ImageIcon getImage(){
+        return doorImage;
     }
 }
