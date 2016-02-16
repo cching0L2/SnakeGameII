@@ -207,6 +207,7 @@ public class Game extends Canvas implements Runnable {
       FONT_CHART.put("UIFont12B", new Font("Eurostile", Font.BOLD, 12));
       FONT_CHART.put("UIFont20B", new Font("Eurostile", Font.BOLD, 20));
       FONT_CHART.put("UIFont24", new Font("Eurostile", Font.PLAIN, 28));
+      FONT_CHART.put("UIFont16", new Font("Eurostile", Font.PLAIN, 16));
       FONT_CHART.put("UIFont20", new Font("Eurostile", Font.PLAIN, 20));
       FONT_CHART.put("UIFont40", new Font("Eurostile", Font.PLAIN, 40));
       FONT_CHART.put("TitleFont", new Font("Noteworthy", Font.PLAIN, 80));

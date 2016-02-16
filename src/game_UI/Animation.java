@@ -27,6 +27,7 @@ public class Animation{
             handler.addObject(new IntroSnake(Category.Snake, keyController, handler));
         }
         handler.tick();
+        System.out.println(handler.objects.size());
     }
     
     public void render(Graphics g){
