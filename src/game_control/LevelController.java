@@ -62,7 +62,8 @@ public class LevelController {
         handler.objects.clear();
         handler.addObject(new Snake(Category.Snake, keyController, handler));
         handler.addObject(new Cookie(Util.getRandomPosition(handler), Category.Food));
-        handler.addAllObject(getLevelObstacles(0)); //add obstacles that belong to the first level 
+        handler.addAllObject(getLevelObstacles(0)); 
+        //add obstacles that belong to the first level 
         keyController.resetInitialDirection(Direction.Right);
         LevelController.setLevel(0);
         LevelController.setScore(0);
@@ -97,6 +98,19 @@ public class LevelController {
             obstacle.add(new Fountain(new Position(19,18)));
             break;
         }
+        case 3:{
+            for(int x = 0; x<5; x++)
+                obstacle.add(new Bush(new Position(27+x, 5)));
+            obstacle.add(new Fountain(new Position(32, 5)));
+            for(int y = 0; y<5; y++)
+                obstacle.add(new Bush(new Position(34, 8+y)));
+            for(int x = 0; x<5; x++)
+                obstacle.add(new Bush(new Position(8+x, 34)));
+            obstacle.add(new Fountain(new Position(5, 32)));
+            for(int y = 0; y<5; y++)
+                obstacle.add(new Bush(new Position(5, 27+y)));
+            break;
+        }
         default: break;
         }
         
@@ -127,8 +141,7 @@ public class LevelController {
         }
 
         //control the appearance and disappearance of doors, level, and score
-        if (score == nextLevelScore) { // one score until next level
-            if (Collision.snakeOpenDoor(tempSnake, randDoor)) { //if snake's head touches door 
+        if (score == nextLevelScore && Collision.snakeOpenDoor(tempSnake, randDoor)) { // one score until next level and snake head touches door
                 //only increment level after door has been opened
                 level++;
                 Game.gameState = State.LevelUp;
@@ -138,16 +151,18 @@ public class LevelController {
                 handler.removeObject(randDoor); //remove door from the game board 
                 removeObstacles(handler); //remove all obstacles in game 
                 handler.addAllObject(getLevelObstacles(level)); //add obstacles that belong to the new level 
-                
+                handler.addObject(new Cookie(Util.getRandomPosition(handler), Category.Food));
                 randDoor = new Door(Util.getRandomPosition(handler), Category.Door);
                 //create a new random door with different location
-            }
         } 
         else {
             if (tempSnake.getSize() > prevSnakeLength){
                 score++;
                 if(score == nextLevelScore)
                     handler.addObject(randDoor);
+                else
+                    handler.addObject(new Cookie(Util.getRandomPosition(handler), Category.Food));
+                
                 prevSnakeLength = tempSnake.getSize(); //update prevSnakeLength 
             }
         }

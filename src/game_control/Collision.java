@@ -6,7 +6,6 @@ import java.util.Random;
 
 import game_UI.Game;
 import game_elements.Category;
-import game_elements.Cookie;
 import game_elements.Door;
 import game_elements.Food;
 import game_elements.GameElements;
@@ -18,13 +17,14 @@ public class Collision {
     static Random random = new Random();
 
     public static boolean snakeEatFood(Snake snake, Handler handler) {
+        
         for (int i = 0; i < handler.objects.size(); i++) {
             GameElements tempObject = handler.objects.get(i);
             if (tempObject.getCategory() == Category.Food) {
                 Food food = (Food) tempObject;
                 if (food.getBound().intersects(snake.getHeadBound())) {
                     handler.removeObject(tempObject);
-                    handler.addObject(new Cookie(Util.getRandomPosition(handler), Category.Food));
+                    //handler.addObject(new Cookie(Util.getRandomPosition(handler), Category.Food));
                     return true;
                 }
             }
@@ -33,9 +33,7 @@ public class Collision {
     }
 
     public static boolean snakeOpenDoor(Snake snake, Door door) {
-        if (door.getBound().intersects(snake.getHeadBound()))
-            return true;
-        return false;
+        return door.getBound().intersects(snake.getHeadBound());
     }
 
     public static boolean snakeHitSelf(Snake snake) {
