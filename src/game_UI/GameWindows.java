@@ -184,12 +184,18 @@ public class GameWindows{
             NUM_ROW = num_row;
             NUM_COL = num_col;
             this.menu = menu;
-            String[] name_list = {"First Step","Dead on the Spot","Cookie Lover","Cookie Collector","","","","","","","","","","",""};
+            String[] name_list = {"First Step","Dead on the Spot","Cookie Lover","Cookie Collector","Cookie Lunatic","So-So Snake",
+                    "Pretty Good","Master Snake","Living Legend","","","","","",""};
             ImageIcon[] image_list = {Util.createImageIcon("first_step", "../AchievementIcon/first-step.gif"), 
                     Util.createImageIcon("dead_on_the_spot", "../AchievementIcon/dead-spot.gif"), 
                     Util.createImageIcon("cookie_lover", "../AchievementIcon/10-cookie.gif"), 
-                    Util.createImageIcon("cookie_collector", "../AchievementIcon/25-cookie.gif")
-                    , null, null, null, null, null, null, null, null, null, null, null};
+                    Util.createImageIcon("cookie_collector", "../AchievementIcon/25-cookie.gif"), 
+                    Util.createImageIcon("cookie_lunatic", "../AchievementIcon/80-cookie.gif"), 
+                    Util.createImageIcon("so-so", "../AchievementIcon/10-point.gif"), 
+                    Util.createImageIcon("pretty_good", "../AchievementIcon/30-point.gif"), 
+                    Util.createImageIcon("master_snake", "../AchievementIcon/60-point.gif"), 
+                    Util.createImageIcon("living_legend", "../AchievementIcon/90-point.gif"), 
+                    null, null, null, null, null, null};
             
             for(int i = 0; i < NUM_ROW; i++)
                 for(int j = 0; j < NUM_COL; j++)

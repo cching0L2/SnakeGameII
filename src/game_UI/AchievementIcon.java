@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
@@ -24,7 +25,9 @@ public class AchievementIcon {
     String name;
     ImageIcon image;
     
-    double progress = 1.0; //testing
+    Random random = new Random();
+    
+    double progress = random.nextInt(2); //testing
     
     public AchievementIcon(Position position, String name, ImageIcon image) {
         this.position = position;
@@ -60,18 +63,20 @@ public class AchievementIcon {
         //provide more detailed information regarding this achievement
         g.drawImage(image.getImage(), 320, 50, CELL_WIDTH, CELL_HEIGHT, null);
         
-        g.setColor(Color.BLUE);
-        g.setFont(Game.FONT_CHART.get("UIFont20B"));
-        g.drawString("LOCKED", 390, 85);
-
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        
+        g.setColor(Color.BLUE);
+        g.setFont(Game.FONT_CHART.get("UIFont20B"));
+        if(progress!=1.0) g.drawString("LOCKED", 390, 85);
+        else g.drawString("UNLOCKED", 390, 85);
         
         g.setColor(Game.COLOR_CHART.get("GBBorderColor"));
         g.setFont(Game.FONT_CHART.get("UIFont20B"));
         g.drawString(name, 320, 140);
         
         g.setColor(Color.black);
+        g.drawRect(320, 50, CELL_WIDTH, CELL_HEIGHT);
         g.drawLine(320, 147, 500, 147);
         g.drawLine(320, 150, 500, 150);
         
