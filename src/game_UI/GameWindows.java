@@ -184,18 +184,24 @@ public class GameWindows{
             NUM_ROW = num_row;
             NUM_COL = num_col;
             this.menu = menu;
-            String[] name_list = {"First Step","Dead on the Spot","Cookie Lover","Cookie Collector","Cookie Lunatic","So-So Snake",
-                    "Pretty Good","Master Snake","Living Legend","","","","","",""};
+            String[] name_list = {"First Step","Dead on the Spot","Cookie Lover","Cookie Collector","So-So Snake",
+                    "Pretty Good","Plant Destroyer","Water Contaminant","Fence Finder","Ambitious Dreamer","Donut Taster",
+                    "Donut Dealer","Master Snake","Cookie Lunatic","Living Legend"};
             ImageIcon[] image_list = {Util.createImageIcon("first_step", "../AchievementIcon/first-step.gif"), 
                     Util.createImageIcon("dead_on_the_spot", "../AchievementIcon/dead-spot.gif"), 
                     Util.createImageIcon("cookie_lover", "../AchievementIcon/10-cookie.gif"), 
                     Util.createImageIcon("cookie_collector", "../AchievementIcon/25-cookie.gif"), 
-                    Util.createImageIcon("cookie_lunatic", "../AchievementIcon/80-cookie.gif"), 
                     Util.createImageIcon("so-so", "../AchievementIcon/10-point.gif"), 
                     Util.createImageIcon("pretty_good", "../AchievementIcon/30-point.gif"), 
+                    Util.createImageIcon("plant_destroyer", "../AchievementIcon/plant-destroyer.gif"), 
+                    Util.createImageIcon("water_contaminant", "../AchievementIcon/water-contaminant.gif"), 
+                    Util.createImageIcon("fence_finder", "../AchievementIcon/fence-finder.gif"), 
+                    Util.createImageIcon("ambitious_dreamer", "../AchievementIcon/ambitious.gif"), 
+                    Util.createImageIcon("donut_taster", "../AchievementIcon/donut-taster.gif"), 
+                    Util.createImageIcon("donut_dealer", "../AchievementIcon/donut-dealer.gif"),
                     Util.createImageIcon("master_snake", "../AchievementIcon/60-point.gif"), 
-                    Util.createImageIcon("living_legend", "../AchievementIcon/90-point.gif"), 
-                    null, null, null, null, null, null};
+                    Util.createImageIcon("cookie_lunatic", "../AchievementIcon/80-cookie.gif"), 
+                    Util.createImageIcon("living_legend", "../AchievementIcon/90-point.gif"), };
             
             for(int i = 0; i < NUM_ROW; i++)
                 for(int j = 0; j < NUM_COL; j++)
