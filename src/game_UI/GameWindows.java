@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import game_control.LevelController;
 import game_control.Menu;
 import game_control.Position;
+import game_control.Util;
 
 public class GameWindows{
     Map<String, Color> COLOR_CHART = Game.getColorChart();
@@ -166,16 +167,16 @@ public class GameWindows{
         private int NUM_ROW, NUM_COL;
         
         final int CELL_WIDTH = 60;
-        final int CELL_HGAP = 50;
-        final int H_MARGIN = 65;
+        final int CELL_HGAP = 40;
+        final int H_MARGIN = 20;
         
         final int CELL_HEIGHT = 60;
-        final int CELL_VGAP = 60;
-        final int V_MARGIN = 40;
+        final int CELL_VGAP = 30;
+        final int V_MARGIN = 30;
         
         final int PROG_BAR_HEIGHT = 5;
         final int PROG_BAR_WIDTH = CELL_WIDTH;
-        final int TOP_MARGIN = 6;
+        final int TOP_MARGIN = 40;
         
         Menu menu;
         
@@ -183,11 +184,17 @@ public class GameWindows{
             NUM_ROW = num_row;
             NUM_COL = num_col;
             this.menu = menu;
+            String[] name_list = {"First Step","Dead on the Spot","Cookie Lover","Cookie Collector","","","","","","","","","","",""};
+            ImageIcon[] image_list = {Util.createImageIcon("first_step", "../AchievementIcon/first-step.gif"), 
+                    Util.createImageIcon("dead_on_the_spot", "../AchievementIcon/dead-spot.gif"), 
+                    Util.createImageIcon("cookie_lover", "../AchievementIcon/10-cookie.gif"), 
+                    Util.createImageIcon("cookie_collector", "../AchievementIcon/25-cookie.gif")
+                    , null, null, null, null, null, null, null, null, null, null, null};
             
             for(int i = 0; i < NUM_ROW; i++)
                 for(int j = 0; j < NUM_COL; j++)
-                    addIcon(new Position(H_MARGIN + (CELL_WIDTH + CELL_HGAP)*i,V_MARGIN 
-                            + (CELL_HEIGHT + CELL_VGAP)*j), "", null);
+                    addIcon(new Position(H_MARGIN + i*(CELL_WIDTH+CELL_HGAP),
+                            TOP_MARGIN + j*(CELL_HEIGHT+CELL_VGAP)), name_list[j*NUM_ROW+i], image_list[j*NUM_ROW+i]);
         }
         
         public void addIcon(Position position, String name, ImageIcon image){
@@ -204,17 +211,32 @@ public class GameWindows{
         }
         
         public void render(Graphics g){
-            for (AchievementIcon ai : iconList)
+            g.setColor(new Color(200,200,200));
+            g.fillRect(75, 505, 150, 25);
+            g.fillRect(300, 0, Game.WIDTH-200, Game.HEIGHT);
+            for (AchievementIcon ai : iconList){
                 ai.render(g);
+                if(ai.isHoverOver(menu.getXCursor(), menu.getYCursor())){
+                    renderInfoBox(g);
+                    ai.renderDetailInfo(g);
+                }
+            }
             
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             g.setFont(FONT_CHART.get("UIFont16"));
-            g.setColor(new Color(200,200,200));
-            g.fillRect(190, 505, 150, 25);
+            g.setColor(COLOR_CHART.get("UIColor"));
+            
             g.setColor(COLOR_CHART.get("GBBorderColor"));
-            g.drawRect(190, 505, 150, 25);
-            g.drawString("Back to Main Menu", 200, 523);
+            g.drawRect(75, 505, 150, 25);
+            g.drawString("Back to Main Menu", 85, 523);
+        }
+        
+        public void renderInfoBox(Graphics g){
+            g.setColor(COLOR_CHART.get("GBBorderColor"));
+            g.drawRect(314, 40, 200, 270);
+            g.setColor(COLOR_CHART.get("UIColor"));
+            g.fillRect(314, 40, 200, 270);
         }
     }
 }

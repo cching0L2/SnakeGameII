@@ -58,7 +58,7 @@ public class Menu extends MouseAdapter{
             }
         }
         else if(Game.gameState==State.Achievement){
-            if(mouseSelect(XCursor, YCursor, 190, 505, 150, 25))
+            if(mouseSelect(XCursor, YCursor, 75, 505, 150, 25))
                 Game.gameState = State.Menu;
         }
     }

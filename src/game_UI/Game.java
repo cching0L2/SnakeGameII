@@ -77,7 +77,7 @@ public class Game extends Canvas implements Runnable {
         
         initializeColorsFonts();
         gameWindows = new GameWindows();
-        achievementWindow = gameWindows. new AchievementWindow(4, 4, menu);
+        achievementWindow = gameWindows. new AchievementWindow(3, 5, menu);
         
         new GameFrame(WIDTH, HEIGHT, "Snake Game Version 2.0", this);
     }
@@ -213,6 +213,7 @@ public class Game extends Canvas implements Runnable {
       COLOR_CHART.put("IconBG", new Color(0,0,0));
       
       FONT_CHART.put("UIFont", new Font("Eurostile", Font.PLAIN, 16));
+      FONT_CHART.put("UIFont12", new Font("Eurostile", Font.PLAIN, 12));
       FONT_CHART.put("UIFont12B", new Font("Eurostile", Font.BOLD, 12));
       FONT_CHART.put("UIFont20B", new Font("Eurostile", Font.BOLD, 20));
       FONT_CHART.put("UIFont24", new Font("Eurostile", Font.PLAIN, 28));
