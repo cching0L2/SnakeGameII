@@ -46,6 +46,7 @@ public class Game extends Canvas implements Runnable {
     private Animation animation;
     
     private GameWindows gameWindows;
+    private GameWindows.AchievementWindow achievementWindow;
     
     //performance trackers 
 //    private long elapsedTime = 0;
@@ -76,6 +77,7 @@ public class Game extends Canvas implements Runnable {
         
         initializeColorsFonts();
         gameWindows = new GameWindows();
+        achievementWindow = gameWindows. new AchievementWindow(4, 4, menu);
         
         new GameFrame(WIDTH, HEIGHT, "Snake Game Version 2.0", this);
     }
@@ -124,6 +126,10 @@ public class Game extends Canvas implements Runnable {
             progressBar.tick();
             break;
         }
+        case Achievement:{
+            achievementWindow.tick();
+            break;
+        }
         default:
             break;
         }
@@ -150,7 +156,7 @@ public class Game extends Canvas implements Runnable {
         g.setColor(COLOR_CHART.get("UIColor"));
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
-        if (gameState != State.Menu) {
+        if (gameState != State.Menu && gameState != State.Achievement) {
             gameWindows.renderBackground(g);
         }
 
@@ -185,6 +191,8 @@ public class Game extends Canvas implements Runnable {
             LevelWindows.renderLevelInstruction(LevelController.getLevel(), g);
             break;
         }
+        case Achievement:
+            achievementWindow.render(g);
         default:
             break;
         }
@@ -202,6 +210,7 @@ public class Game extends Canvas implements Runnable {
       COLOR_CHART.put("StatementColor", new Color(200, 200, 200));
       COLOR_CHART.put("PBColor", new Color(140, 140, 140));
       COLOR_CHART.put("SelectColor", new Color(102, 102, 255));
+      COLOR_CHART.put("IconBG", new Color(0,0,0));
       
       FONT_CHART.put("UIFont", new Font("Eurostile", Font.PLAIN, 16));
       FONT_CHART.put("UIFont12B", new Font("Eurostile", Font.BOLD, 12));

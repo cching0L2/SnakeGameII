@@ -13,6 +13,8 @@ public class Menu extends MouseAdapter{
     Random random;
     private String currentSelect="";
     
+    int XCursor, YCursor;
+    
     public Menu(LevelController levelController, HUD hud, Handler handler){
         this.handler = handler;
         this.levelController = levelController;
@@ -22,8 +24,8 @@ public class Menu extends MouseAdapter{
     
     @Override 
     public void mousePressed(MouseEvent e) {
-        int XCursor = e.getX();
-        int YCursor = e.getY();
+        XCursor = e.getX();
+        YCursor = e.getY();
         
         if(Game.gameState==State.Menu){
             if(mouseSelect(XCursor, YCursor, 220, 255, 95, 18)){
@@ -32,6 +34,8 @@ public class Menu extends MouseAdapter{
             }
             else if(mouseSelect(XCursor, YCursor, 250, 335, 38, 18))
                 System.exit(0);
+            else if(mouseSelect(XCursor, YCursor, 208, 295, 123, 18))
+                Game.gameState = State.Achievement;
         }
         
         else if(Game.gameState==State.Over){
@@ -53,6 +57,10 @@ public class Menu extends MouseAdapter{
                 Game.gameState = State.Menu;
             }
         }
+        else if(Game.gameState==State.Achievement){
+            if(mouseSelect(XCursor, YCursor, 190, 505, 150, 25))
+                Game.gameState = State.Menu;
+        }
     }
     
     public boolean mouseSelect(int XCursor, int YCursor, int x, int y, int width, int height){
@@ -66,8 +74,9 @@ public class Menu extends MouseAdapter{
     
     @Override 
     public void mouseMoved(MouseEvent e){
-        int XCursor = e.getX();
-        int YCursor = e.getY();
+        XCursor = e.getX();
+        YCursor = e.getY();
+        
         if(mouseSelect(XCursor, YCursor, 220, 255, 95, 18)){
             currentSelect = "New Game";
         }
@@ -86,5 +95,13 @@ public class Menu extends MouseAdapter{
     
     public String getCurrentSelect(){
         return currentSelect;
+    }
+    
+    public int getXCursor(){
+        return XCursor;
+    }
+    
+    public int getYCursor(){
+        return YCursor;
     }
 }

@@ -111,6 +111,34 @@ public class LevelController {
                 obstacle.add(new Bush(new Position(5, 27+y)));
             break;
         }
+        case 4:{
+            obstacle.add(new Fence(new Position(11,13), Orientation.Horizontal));
+            obstacle.add(new Fence(new Position(11,13), Orientation.Vertical));
+            obstacle.add(new Fence(new Position(16,24), Orientation.Horizontal));
+            obstacle.add(new Fence(new Position(27,13), Orientation.Vertical));
+            
+            for(int x = 17; x<22; x++)
+                for(int y = 18; y<21; y++)
+                    obstacle.add(new Bush(new Position(x, y)));
+            for(int x = 18; x<=20; x++)
+                obstacle.add(new FlowerPatch(new Position(x, 19)));
+            
+            obstacle.add(new Fountain(new Position(8, 17)));
+            obstacle.add(new Fountain(new Position(28, 17)));
+            
+            for(int y = 17; y<20; y++)
+                obstacle.add(new Bush(new Position(31, y)));
+            for(int y = 17; y<20; y++)
+                obstacle.add(new Bush(new Position(7, y)));
+            for(int x = 7; x<=10; x++)
+                obstacle.add(new Bush(new Position(x,16)));
+            for(int x = 28; x<=31; x++)
+                obstacle.add(new Bush(new Position(x,16)));
+            for(int x = 7; x<=10; x++)
+                obstacle.add(new Bush(new Position(x,20)));
+            for(int x = 28; x<=31; x++)
+                obstacle.add(new Bush(new Position(x,20)));
+        }
         default: break;
         }
         

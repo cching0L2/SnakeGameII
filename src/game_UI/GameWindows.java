@@ -5,11 +5,16 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.ImageIcon;
+
 import game_control.LevelController;
 import game_control.Menu;
+import game_control.Position;
 
 public class GameWindows{
     Map<String, Color> COLOR_CHART = Game.getColorChart();
@@ -153,5 +158,63 @@ public class GameWindows{
         g.drawString("You have cleared the level!", 155, 280);
         g.setFont(FONT_CHART.get("UIFont12B"));
         g.drawString("Press SPACE to enter the next level.", 175, 310);
+    }
+    
+    public class AchievementWindow{
+        
+        List<AchievementIcon> iconList = new ArrayList<AchievementIcon>();
+        private int NUM_ROW, NUM_COL;
+        
+        final int CELL_WIDTH = 60;
+        final int CELL_HGAP = 50;
+        final int H_MARGIN = 65;
+        
+        final int CELL_HEIGHT = 60;
+        final int CELL_VGAP = 60;
+        final int V_MARGIN = 40;
+        
+        final int PROG_BAR_HEIGHT = 5;
+        final int PROG_BAR_WIDTH = CELL_WIDTH;
+        final int TOP_MARGIN = 6;
+        
+        Menu menu;
+        
+        public AchievementWindow(int num_row, int num_col, Menu menu){
+            NUM_ROW = num_row;
+            NUM_COL = num_col;
+            this.menu = menu;
+            
+            for(int i = 0; i < NUM_ROW; i++)
+                for(int j = 0; j < NUM_COL; j++)
+                    addIcon(new Position(H_MARGIN + (CELL_WIDTH + CELL_HGAP)*i,V_MARGIN 
+                            + (CELL_HEIGHT + CELL_VGAP)*j), "", null);
+        }
+        
+        public void addIcon(Position position, String name, ImageIcon image){
+            iconList.add(new AchievementIcon(position, name, image));
+        }
+        
+        public void tick(){
+            for (AchievementIcon ai : iconList){
+                ai.tick();
+                if(ai.isHoverOver(menu.getXCursor(), menu.getYCursor())){
+                    //System.out.println("Hovered over: "+ai);
+                }
+            }
+        }
+        
+        public void render(Graphics g){
+            for (AchievementIcon ai : iconList)
+                ai.render(g);
+            
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            g.setFont(FONT_CHART.get("UIFont16"));
+            g.setColor(new Color(200,200,200));
+            g.fillRect(190, 505, 150, 25);
+            g.setColor(COLOR_CHART.get("GBBorderColor"));
+            g.drawRect(190, 505, 150, 25);
+            g.drawString("Back to Main Menu", 200, 523);
+        }
     }
 }
