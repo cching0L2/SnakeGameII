@@ -202,15 +202,47 @@ public class GameWindows{
                     Util.createImageIcon("master_snake", "../AchievementIcon/60-point.gif"), 
                     Util.createImageIcon("cookie_lunatic", "../AchievementIcon/80-cookie.gif"), 
                     Util.createImageIcon("living_legend", "../AchievementIcon/90-point.gif"), };
+            String[] condition_list = {"Start a new game for the first time",
+                    "Die before eating any food to unlock this achievement",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15"};
+            String[] description_list = {"There's a saying that goes \"a journey of a thousand miles begins with a single step\".  "
+                    + "As a snake, despite not having feet, you can still start your journey.",
+                    "How tragic it is, to die, before eating, amazing food..",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15"};
             
             for(int i = 0; i < NUM_ROW; i++)
                 for(int j = 0; j < NUM_COL; j++)
                     addIcon(new Position(H_MARGIN + i*(CELL_WIDTH+CELL_HGAP),
-                            TOP_MARGIN + j*(CELL_HEIGHT+CELL_VGAP)), name_list[j*NUM_ROW+i], image_list[j*NUM_ROW+i]);
+                            TOP_MARGIN + j*(CELL_HEIGHT+CELL_VGAP)), name_list[j*NUM_ROW+i], image_list[j*NUM_ROW+i],
+                            condition_list[j*NUM_ROW+i], description_list[j*NUM_ROW+i]);
         }
         
-        public void addIcon(Position position, String name, ImageIcon image){
-            iconList.add(new AchievementIcon(position, name, image));
+        public void addIcon(Position position, String name, ImageIcon image, String condition, String description){
+            iconList.add(new AchievementIcon(position, name, image, condition, description));
         }
         
         public void tick(){
