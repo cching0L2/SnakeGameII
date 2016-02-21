@@ -21,6 +21,10 @@ public class Fountain extends ObstacleElements{
         this.position = position;
     }
     
+    public String getName(){
+        return "fountain";
+    }
+    
     @Override
     public void tick() {
     }

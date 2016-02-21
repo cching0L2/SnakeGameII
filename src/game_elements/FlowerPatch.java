@@ -21,6 +21,9 @@ public class FlowerPatch extends ObstacleElements{
         this.position = position;
     }
     
+    public String getName(){
+        return "flower patch";
+    }
     @Override
     public void tick() {
     }

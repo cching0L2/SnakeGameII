@@ -156,4 +156,9 @@ public class Snake extends MovingElements {
     public void clearSnake() {
         snake.clear();
     }
+
+    @Override
+    public String getName() {
+        return "snake";
+    }
 }

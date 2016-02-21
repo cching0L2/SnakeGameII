@@ -35,6 +35,10 @@ public class Fence extends ObstacleElements{
             return new Rectangle(position.getX(), position.getY(), 
                     LENGTH, HEIGHT);
     }
+    
+    public String getName(){
+        return "fence";
+    }
 
     @Override
     public void tick() {

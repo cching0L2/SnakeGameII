@@ -12,7 +12,18 @@ import game_elements.GameElements;
 
 public class Util {
     
+    private Util(){} //cannot be instantiated 
+    
     public static int clamp(int val, int min, int max) {
+        if (val < min)
+            return min;
+        else if (val > max)
+            return max;
+        else
+            return val;
+    }
+    
+    public static double clampDouble(double val, double min, double max){
         if (val < min)
             return min;
         else if (val > max)

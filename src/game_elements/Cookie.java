@@ -33,6 +33,10 @@ public class Cookie extends Food{
                 position.getY()*Game.GRID_SIZE+Game.GB_Y, Game.GRID_SIZE, Game.GRID_SIZE, null);
     }
     
+    public String getName(){
+        return "cookie";
+    }
+    
     public ImageIcon getImage(){
         return cookieImage;
     }

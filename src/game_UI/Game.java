@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.Timer;
 
+import game_control.AchievementManager;
 import game_control.Handler;
 import game_control.KeyController;
 import game_control.LevelController;
@@ -44,13 +45,10 @@ public class Game extends Canvas implements Runnable {
     private ProgressBar progressBar;
     private LevelController levelController;
     private Animation animation;
+    private AchievementManager achievementManager;
     
     private GameWindows gameWindows;
     private GameWindows.AchievementWindow achievementWindow;
-    
-    //performance trackers 
-//    private long elapsedTime = 0;
-//    private long iterationCycle = 0;
 
     public static State gameState = State.Menu;
 
@@ -78,6 +76,7 @@ public class Game extends Canvas implements Runnable {
         initializeColorsFonts();
         gameWindows = new GameWindows();
         achievementWindow = gameWindows. new AchievementWindow(3, 5, menu);
+        achievementManager = AchievementManager.getInstace(levelController, handler, achievementWindow);
         
         new GameFrame(WIDTH, HEIGHT, "Snake Game Version 2.0", this);
     }
@@ -114,7 +113,8 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick() {
-        //long timeStart = System.nanoTime();
+        achievementManager.tick();
+        
         switch(gameState){
         case Menu:{
             animation.tick();
@@ -133,12 +133,6 @@ public class Game extends Canvas implements Runnable {
         default:
             break;
         }
-       // long timeEnd = System.nanoTime();
-        
-        //performance trackers
-//        elapsedTime += (timeEnd-timeStart)/10000;
-//        iterationCycle++;
-        //System.out.println("average tick time: "+elapsedTime/iterationCycle);
     }
 
     private void render() {
@@ -149,7 +143,7 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();
-
+        
         g.setFont(FONT_CHART.get("UIFont"));
 
         // background

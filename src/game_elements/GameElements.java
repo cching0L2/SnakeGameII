@@ -19,4 +19,6 @@ public abstract class GameElements{
     
     public abstract List<Position> getPositions();
     
+    public abstract String getName();
+    
 }

@@ -36,6 +36,10 @@ public class Bush extends ObstacleElements{
         return new Rectangle(position.getX(), position.getY(), LENGTH, HEIGHT);
     }
 
+    public String getName(){
+        return "bush";
+    }
+    
     @Override
     public List<Position> getPositions() {
         List<Position> returnList = new ArrayList<Position>();

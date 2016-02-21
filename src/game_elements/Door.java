@@ -33,6 +33,10 @@ public class Door extends GameElements{
                 Game.GRID_SIZE, Game.GRID_SIZE, null);
     }
     
+    public String getName(){
+        return "door";
+    }
+    
     public Rectangle getBound(){
         return new Rectangle(position.getX(), position.getY(), LENGTH, HEIGHT);
     }

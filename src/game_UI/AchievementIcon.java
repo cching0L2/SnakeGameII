@@ -29,7 +29,7 @@ public class AchievementIcon {
 
     Random random = new Random();
 
-    double progress = random.nextInt(2); // testing
+    double progress = 0.0; 
 
     public AchievementIcon(Position position, String name, ImageIcon image, String condition, String description) {
         this.position = position;
@@ -86,10 +86,10 @@ public class AchievementIcon {
         g.drawLine(320, 150, 500, 150);
 
         g.setFont(Game.FONT_CHART.get("UIFont16"));
-        this.drawStringInManyLines(g, condition, 320, 170, 24);
+        this.drawStringInManyLines(g, condition, 320, 170, 25);
 
         g.setFont(Game.FONT_CHART.get("UIFont12B"));
-        this.drawStringInManyLines(g, description, 320, 225, 30);
+        this.drawStringInManyLines(g, description, 320, 225, 32);
     }
 
     public boolean isHoverOver(int XCursor, int YCursor) {
@@ -106,6 +106,14 @@ public class AchievementIcon {
 
     public Position getPosition() {
         return position;
+    }
+    
+    public double getProgress(){
+        return progress;
+    }
+    
+    public void setProgress(double progress){
+        this.progress = progress;
     }
 
     private void drawStringInManyLines(Graphics g, String text, int x, int y, int maxChar) {

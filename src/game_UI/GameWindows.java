@@ -163,7 +163,7 @@ public class GameWindows{
     
     public class AchievementWindow{
         
-        List<AchievementIcon> iconList = new ArrayList<AchievementIcon>();
+        public List<AchievementIcon> iconList = new ArrayList<AchievementIcon>();
         private int NUM_ROW, NUM_COL;
         
         final int CELL_WIDTH = 60;
@@ -202,37 +202,37 @@ public class GameWindows{
                     Util.createImageIcon("master_snake", "../AchievementIcon/60-point.gif"), 
                     Util.createImageIcon("cookie_lunatic", "../AchievementIcon/80-cookie.gif"), 
                     Util.createImageIcon("living_legend", "../AchievementIcon/90-point.gif"), };
-            String[] condition_list = {"Start a new game for the first time",
+            String[] condition_list = {"Start a new game for the first time to unlock this achievement",
                     "Die before eating any food to unlock this achievement",
-                    "3",
-                    "4",
-                    "5",
-                    "6",
-                    "7",
-                    "8",
-                    "9",
-                    "10",
-                    "11",
-                    "12",
-                    "13",
-                    "14",
-                    "15"};
+                    "Eat 10 cookies to unlock this achievement",
+                    "Eat 25 cookies to unlock this achievement",
+                    "Achieve a score of 10 or better in a game to unlock this achievement",
+                    "Achieve a score of 30 or better in a game to unlock this achievement",
+                    "Crash into bushes or flower patches 15 times to unlock this achievement",
+                    "Crash into fountains 15 times to unlock this achievement",
+                    "Crash into fences 15 times to unlock this achievement",
+                    "View the achievement page 10 times to unlock this achievement",
+                    "Eat 15 donuts to unlock this achievement",
+                    "Eat 45 donuts to unlock this achievement",
+                    "Achieve a score of 60 or better in a game to unlock this achievement",
+                    "Eat 80 cookies to unlock this achievement",
+                    "Achieve a score of 90 or better in a game to unlock this achievement"};
             String[] description_list = {"There's a saying that goes \"a journey of a thousand miles begins with a single step\".  "
-                    + "As a snake, despite not having feet, you can still start your journey.",
+                    + "As a snake, despite not having feet, I can still start my journey.",
                     "How tragic it is, to die, before eating, amazing food..",
-                    "3",
-                    "4",
-                    "5",
-                    "6",
-                    "7",
-                    "8",
-                    "9",
-                    "10",
-                    "11",
-                    "12",
-                    "13",
-                    "14",
-                    "15"};
+                    "Yum..crispy on the outside, gooey on the inside.",
+                    "**diabetes alert**",
+                    "I am on my way of becoming a great snake.",
+                    "I would like to thank food for being my constant source of motivation...",
+                    "It doesn't matter how much I love them, I don't think they appreciate my presence.",
+                    "Didn't jump into the fountain properly......",
+                    "Embrace the obstacles!  Literately.",
+                    "Keep dreaming, keep faking.  I'll fake it until I make it!",
+                    "I have proven that I even though I eat a lot of donuts, I can still move fast!",
+                    "One donut a day, keeps sadness away!",
+                    "I think I am qualified to call myself a pretty capable snake.",
+                    "I used to own a cookie store, then I ate all the cookies in my store.",
+                    "Thy new snake king has risen to the throne.  Bow to me, I have accomplished the impossible."};
             
             for(int i = 0; i < NUM_ROW; i++)
                 for(int j = 0; j < NUM_COL; j++)

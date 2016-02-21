@@ -14,7 +14,10 @@ import game_elements.Snake;
 
 public class Collision {
 
+    private Collision(){} //cannot be instantiated
+    
     static Random random = new Random();
+    static private String foodEaten = "", collisionObject = "";
 
     public static boolean snakeEatFood(Snake snake, Handler handler) {
         
@@ -24,11 +27,12 @@ public class Collision {
                 Food food = (Food) tempObject;
                 if (food.getBound().intersects(snake.getHeadBound())) {
                     handler.removeObject(tempObject);
-                    //handler.addObject(new Cookie(Util.getRandomPosition(handler), Category.Food));
+                    foodEaten = food.getName();
                     return true;
                 }
             }
         }
+        foodEaten = "";
         return false;
     }
 
@@ -66,10 +70,12 @@ public class Collision {
             if (o instanceof ObstacleElements) {
                 ObstacleElements tempObstacle = (ObstacleElements) o;
                 if (tempObstacle.getBound().intersects(head)) {
+                    collisionObject = tempObstacle.getName();
                     return true;
                 }
             }
         }
+        collisionObject = "";
         return false;
     }
 
@@ -81,5 +87,21 @@ public class Collision {
             return true;
         }
         return true;
+    }
+    
+    public static String getfoodEaten(){
+        return foodEaten;
+    }
+    
+    public static String getCollisionObject(){
+        return collisionObject;
+    }
+    
+    public static void resetCollisionObject(){
+        collisionObject = "";
+    }
+    
+    public static void resetFoodEaten(){
+        foodEaten = "";
     }
 }
