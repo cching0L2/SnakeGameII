@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +13,14 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
+import game_control.Handler;
 import game_control.LevelController;
 import game_control.Menu;
 import game_control.Position;
 import game_control.Util;
+import game_elements.Category;
+import game_elements.Cookie;
+import game_elements.SmartSnake;
 
 public class GameWindows{
     Map<String, Color> COLOR_CHART = Game.getColorChart();
@@ -51,37 +56,29 @@ public class GameWindows{
         
         g.setColor(COLOR_CHART.get("PBColor"));
         g.setFont(FONT_CHART.get("UIFont20B"));
-        if(menu.getCurrentSelect().equals("New Game")){
-            g.setColor(COLOR_CHART.get("SelectColor"));
-        }
-        else{
-            g.setColor(COLOR_CHART.get("PBColor"));
-        }
-        g.drawString("New Game", 220, 270);
         
-        if(menu.getCurrentSelect().equals("Achievements")){
-            g.setColor(COLOR_CHART.get("SelectColor"));
-        }
-        else{
-            g.setColor(COLOR_CHART.get("PBColor"));
-        }
-        g.drawString("Achievements", 208, 310);
+//        g.drawRect(220, 261, 93, 15);
+//        g.drawRect(195, 296, 150, 15);
+//        g.drawRect(208, 331, 122, 15);
+//        g.drawRect(250, 366, 36, 15);
+//        g.drawRect(218, 401, 105, 15);
         
-        if(menu.getCurrentSelect().equals("Quit")){
-            g.setColor(COLOR_CHART.get("SelectColor"));
-        }
-        else{
-            g.setColor(COLOR_CHART.get("PBColor"));
-        }
-        g.drawString("Quit", 250, 350);
+        g.drawString("New Game", 220, 275);
+        g.drawString("Game Instruction", 195, 310);
+        g.drawString("Achievements", 208, 345);
+        g.drawString("Quit", 250, 380);
+        g.drawString("Reset Game", 218, 415);
         
-        if(menu.getCurrentSelect().equals("Reset Game")){
+        if(!menu.getCurrentSelect().equals("")){
             g.setColor(COLOR_CHART.get("SelectColor"));
+            switch(menu.getCurrentSelect()){
+            case "New Game":  g.drawString("New Game", 220, 275); break;
+            case "Game Instruction": g.drawString("Game Instruction", 195, 310); break;
+            case "Achievements": g.drawString("Achievements", 208, 345); break;
+            case "Quit": g.drawString("Quit", 250, 380);break;
+            case "Reset Game": g.drawString("Reset Game", 218, 415); break;
+            }
         }
-        else{
-            g.setColor(COLOR_CHART.get("PBColor"));
-        }
-        g.drawString("Reset Game", 218, 390);
     }
     
     public void renderPauseWindow(Graphics g) {
@@ -159,6 +156,39 @@ public class GameWindows{
         g.drawString("You have cleared the level!", 155, 280);
         g.setFont(FONT_CHART.get("UIFont12B"));
         g.drawString("Press SPACE to enter the next level.", 175, 310);
+    }
+    
+    public static class GameInstruction{
+        private GameInstruction(){}; //cannot be instantiated
+        private static Handler handler;
+        private static int WIDTH = Game.WIDTH - 48, HEIGHT = 200;
+        
+        public static void tick(){
+            if(handler==null){
+                handler = new Handler();
+                handler.addObject(new SmartSnake(Category.Snake, null, handler));
+            }
+            handler.tick();
+        }
+        
+        public static void render(Graphics g){
+            g.setColor(Game.COLOR_CHART.get("GBColor"));
+            g.fillRect(24, 24, WIDTH, HEIGHT);
+            g.setColor(Color.black);
+            g.drawRect(24, 24, WIDTH, HEIGHT);
+            handler.render(g);
+            
+            g.setColor(new Color(200,200,200));
+            g.fillRect(213, 522, 110, 25);
+            g.setColor(Game.COLOR_CHART.get("GBBorderColor"));
+            g.drawRect(213, 522, 110, 25);
+            g.setFont(Game.FONT_CHART.get("UIFont20B"));
+            g.drawString("Main Menu", 220, 540);
+        }
+        
+        public static Rectangle getBound(){
+            return new Rectangle(24, 24, WIDTH, HEIGHT);
+        }
     }
     
     public class AchievementWindow{

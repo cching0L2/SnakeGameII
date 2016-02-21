@@ -14,8 +14,10 @@ public class LevelController {
     Random random;
     KeyController keyController;
 
+    public static int bestScore = 0;
     public static int score = 0;
     public static int level = 0;
+    //private int MAX_LEVEL = 10;
     private int[] levelScheme = { 0, 5, 10, 16, 24, 35, 48, 65, 85, 105, Integer.MAX_VALUE };
     
     private static int prevSnakeLength;
@@ -194,6 +196,8 @@ public class LevelController {
                 prevSnakeLength = tempSnake.getSize(); //update prevSnakeLength 
             }
         }
+        
+        if(score>bestScore) bestScore = score;
     }
     
     public static int getScore() {

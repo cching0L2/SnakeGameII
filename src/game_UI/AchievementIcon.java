@@ -115,6 +115,10 @@ public class AchievementIcon {
     public void setProgress(double progress){
         this.progress = progress;
     }
+    
+    public void incrementProgress(double increment){
+        progress = Util.clampDouble(progress+increment, 0.0, 1.0);
+    }
 
     private void drawStringInManyLines(Graphics g, String text, int x, int y, int maxChar) {
         int yDelta = 15;

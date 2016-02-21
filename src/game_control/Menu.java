@@ -28,14 +28,16 @@ public class Menu extends MouseAdapter{
         YCursor = e.getY();
         
         if(Game.gameState==State.Menu){
-            if(mouseSelect(XCursor, YCursor, 220, 255, 95, 18)){
+            if(currentSelect == "New Game"){
                 levelController.initializeGame(handler);
                 Game.gameState = State.Game;
             }
-            else if(mouseSelect(XCursor, YCursor, 250, 335, 38, 18))
+            else if(currentSelect == "Quit")
                 System.exit(0);
-            else if(mouseSelect(XCursor, YCursor, 208, 295, 123, 18))
+            else if(currentSelect == "Achievements")
                 Game.gameState = State.Achievement;
+            else if(currentSelect == "Game Instruction")
+                Game.gameState = State.Instruction;
         }
         
         else if(Game.gameState==State.Over){
@@ -61,6 +63,10 @@ public class Menu extends MouseAdapter{
             if(mouseSelect(XCursor, YCursor, 75, 505, 150, 25))
                 Game.gameState = State.Menu;
         }
+        else if(Game.gameState==State.Instruction){
+            if(mouseSelect(XCursor, YCursor, 213, 522, 110, 25))
+                Game.gameState = State.Menu;
+        }
     }
     
     public boolean mouseSelect(int XCursor, int YCursor, int x, int y, int width, int height){
@@ -77,20 +83,18 @@ public class Menu extends MouseAdapter{
         XCursor = e.getX();
         YCursor = e.getY();
         
-        if(mouseSelect(XCursor, YCursor, 220, 255, 95, 18)){
+        if(mouseSelect(XCursor, YCursor, 220, 261, 93, 15))
             currentSelect = "New Game";
-        }
-        else if(mouseSelect(XCursor, YCursor, 208, 295, 123, 18)){
+        else if(mouseSelect(XCursor, YCursor, 208, 331, 122, 15))
             currentSelect = "Achievements";
-        }
-        else if(mouseSelect(XCursor, YCursor, 250, 335, 38, 18)){
+        else if(mouseSelect(XCursor, YCursor, 250, 366, 36, 15))
             currentSelect = "Quit";
-        }
-        else if(mouseSelect(XCursor, YCursor, 218, 375, 108, 18)){
+        else if(mouseSelect(XCursor, YCursor, 218, 401, 105, 15))
             currentSelect = "Reset Game";
-        }
+        else if(mouseSelect(XCursor, YCursor, 195, 296, 150, 15))
+            currentSelect = "Game Instruction";
         else
-            currentSelect = " ";
+            currentSelect = "";
     }
     
     public String getCurrentSelect(){

@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.Timer;
 
+import game_UI.GameWindows.GameInstruction;
 import game_control.AchievementManager;
 import game_control.Handler;
 import game_control.KeyController;
@@ -29,7 +30,7 @@ public class Game extends Canvas implements Runnable {
     public static final int GB_WIDTH = 480, GB_HEIGHT = 480;
     public static final int NUM_GRID_PER_SIDE = GB_WIDTH/GRID_SIZE;
     public static final int WIDTH = GB_WIDTH + GB_X * 2, HEIGHT = GB_HEIGHT + GB_Y * 2;
-    private static final int DELAY = 50;
+    private static final int DELAY = 60;
     private Thread thread;
     private boolean running = false;
     private Timer timer;
@@ -130,6 +131,10 @@ public class Game extends Canvas implements Runnable {
             achievementWindow.tick();
             break;
         }
+        case Instruction:{
+            GameInstruction.tick();
+            break;
+        }
         default:
             break;
         }
@@ -150,7 +155,8 @@ public class Game extends Canvas implements Runnable {
         g.setColor(COLOR_CHART.get("UIColor"));
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
-        if (gameState != State.Menu && gameState != State.Achievement) {
+        if (gameState != State.Menu && gameState != State.Achievement
+                && gameState != State.Instruction) {
             gameWindows.renderBackground(g);
         }
 
@@ -187,6 +193,10 @@ public class Game extends Canvas implements Runnable {
         }
         case Achievement:
             achievementWindow.render(g);
+            break;
+        case Instruction:
+            GameInstruction.render(g);
+            break;
         default:
             break;
         }

@@ -16,7 +16,10 @@ public class LevelWindows {
         switch (level) {
         case 1:
         case 2:
-        case 3: {
+        case 3: 
+        case 4:
+        case 5:
+        case 6:{
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {

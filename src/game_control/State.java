@@ -6,6 +6,7 @@ public enum State{
     Pause,
     Over,
     LevelUp,
-    Achievement;
+    Achievement,
+    Instruction;
     
 }

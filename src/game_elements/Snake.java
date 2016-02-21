@@ -23,7 +23,7 @@ public class Snake extends MovingElements {
     private Direction prevDir = INITIAL_DIRECTION;
 
     private KeyController controller;
-    private Handler handler;
+    protected Handler handler;
 
     public Snake(Category cat, KeyController controller, Handler handler) {
         super(Category.Snake);
