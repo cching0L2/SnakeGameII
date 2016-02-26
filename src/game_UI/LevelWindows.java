@@ -14,6 +14,7 @@ public class LevelWindows {
 
     public static void renderLevelInstruction(int level, Graphics g) {
         switch (level) {
+        case 0:
         case 1:
         case 2:
         case 3: 

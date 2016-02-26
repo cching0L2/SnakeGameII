@@ -162,6 +162,14 @@ public class GameWindows{
         private GameInstruction(){}; //cannot be instantiated
         private static Handler handler;
         private static int WIDTH = Game.WIDTH - 48, HEIGHT = 200;
+        private static ImageIcon rightArrowInactive = Util.createImageIcon("right_inactive", "../image/right-inactive.gif");
+        private static ImageIcon rightArrowActive = Util.createImageIcon("right_active", "../image/right-active.gif");
+        private static ImageIcon leftArrowInactive = Util.createImageIcon("left_inactive", "../image/left-inactive.gif");
+        private static ImageIcon upArrowInactive = Util.createImageIcon("up_inactive", "../image/up-inactive.gif");
+        private static ImageIcon downArrowInactive = Util.createImageIcon("down_inactive", "../image/down-inactive.gif");
+        private static ImageIcon leftArrowActive = Util.createImageIcon("left_active", "../image/left-active.gif");
+        private static ImageIcon upArrowActive = Util.createImageIcon("up_active", "../image/up-active.gif");
+        private static ImageIcon downArrowActive = Util.createImageIcon("down_active", "../image/down-active.gif");
         
         public static void tick(){
             if(handler==null){
@@ -184,6 +192,11 @@ public class GameWindows{
             g.drawRect(213, 522, 110, 25);
             g.setFont(Game.FONT_CHART.get("UIFont20B"));
             g.drawString("Main Menu", 220, 540);
+            
+            g.drawImage(rightArrowActive.getImage(), 465, 190, 30, 30, null);
+            g.drawImage(upArrowActive.getImage(), 435, 160, 30, 30, null);
+            g.drawImage(downArrowActive.getImage(), 435, 190, 30, 30, null);
+            g.drawImage(leftArrowActive.getImage(), 405, 190, 30, 30, null);
         }
         
         public static Rectangle getBound(){

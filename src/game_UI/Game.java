@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable {
     public static final int GB_WIDTH = 480, GB_HEIGHT = 480;
     public static final int NUM_GRID_PER_SIDE = GB_WIDTH/GRID_SIZE;
     public static final int WIDTH = GB_WIDTH + GB_X * 2, HEIGHT = GB_HEIGHT + GB_Y * 2;
-    private static final int DELAY = 60;
+    private static final int DELAY = 50;
     private Thread thread;
     private boolean running = false;
     private Timer timer;

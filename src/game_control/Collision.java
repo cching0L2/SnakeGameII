@@ -25,7 +25,6 @@ public class Collision {
             GameElements tempObject = handler.objects.get(i);
             if (tempObject.getCategory() == Category.Food) {
                 Food food = (Food) tempObject;
-                System.out.println(food.getBound()+" "+snake.getHeadBound());
                 if (food.getBound().intersects(snake.getHeadBound())) {
                     handler.removeObject(tempObject);
                     foodEaten = food.getName();
