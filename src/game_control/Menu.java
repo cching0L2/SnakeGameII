@@ -33,7 +33,7 @@ public class Menu extends MouseAdapter{
                 Game.gameState = State.Game;
             }
             else if(currentSelect == "Quit")
-                System.exit(0);
+                Game.exitGame();
             else if(currentSelect == "Achievements")
                 Game.gameState = State.Achievement;
             else if(currentSelect == "Game Instruction")
@@ -43,7 +43,7 @@ public class Menu extends MouseAdapter{
         else if(Game.gameState==State.Over){
             handler.objects.clear();
             if(mouseSelect(XCursor, YCursor, 185, 380, 155, 40))
-                System.exit(0);
+                Game.exitGame();
             else if(mouseSelect(XCursor, YCursor, 185, 270, 155, 40)){
                 levelController.initializeGame(handler);
                 Game.gameState = State.Game;
@@ -54,7 +54,7 @@ public class Menu extends MouseAdapter{
         }
         else if(Game.gameState==State.Pause){
             if(mouseSelect(XCursor, YCursor, 185, 355, 155, 40))
-                System.exit(0);
+                Game.exitGame();
             else if(mouseSelect(XCursor, YCursor, 185, 295, 155, 40)){
                 Game.gameState = State.Menu;
             }

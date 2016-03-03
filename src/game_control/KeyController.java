@@ -37,7 +37,7 @@ public class KeyController extends KeyAdapter {
                 break;
             }
             case KeyEvent.VK_ESCAPE: {
-                System.exit(0);
+                Game.exitGame();
                 break;
             }
             case KeyEvent.VK_SPACE: {

@@ -234,6 +234,13 @@ public class Game extends Canvas implements Runnable {
     public static Map<String, Font> getFontChart(){
         return FONT_CHART;
     }
+    
+    /**
+     * exit point for the game
+     */
+    public static void exitGame(){
+        System.exit(0);
+    }
 
     public static void main(String[] args) throws InterruptedException {
         new Game();
