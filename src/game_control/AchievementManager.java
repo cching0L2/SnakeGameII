@@ -55,6 +55,20 @@ public class AchievementManager {
         }
     }
     
+    /**
+     * 
+     * set achievement progress of a given achievement
+     * @param achievement - name of achievement to be set
+     * @param progress - progress to set the achievement progress to 
+     */
+    public void setAchievementProgress(String achievement, double progress){
+        for(AchievementIcon ai: achievementWindow.iconList){
+            if(ai.getName().equals(achievement)){
+                ai.setProgress(progress);
+            }
+        }
+    }
+    
     public void tick(){
         State currState = Game.gameState;
         

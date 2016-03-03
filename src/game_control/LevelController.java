@@ -77,7 +77,7 @@ public class LevelController {
         handler.objects.clear();
         handler.addObject(new Snake(Category.Snake, keyController, handler));
         handler.addObject(new Cookie(Util.getRandomPosition(handler), Category.Food));
-        handler.addAllObject(getLevelObstacles(4)); 
+        handler.addAllObject(getLevelObstacles(0)); 
         //add obstacles that belong to the first level 
         keyController.resetInitialDirection(Direction.Right);
         LevelController.setLevel(0);
@@ -242,5 +242,9 @@ public class LevelController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void setBestScore(int bestScore){
+        LevelController.bestScore = bestScore;
     }
 }

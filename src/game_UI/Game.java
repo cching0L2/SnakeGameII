@@ -7,16 +7,19 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import javax.swing.Timer;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import game_UI.GameWindows.GameInstruction;
 import game_control.AchievementManager;
@@ -116,6 +119,30 @@ public class Game extends Canvas implements Runnable {
             }
         });
         timer.start();
+        loadGameStats();
+    }
+
+    /*
+     * load saved achievements and best score into game
+     */
+    private void loadGameStats() {
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(new File("log.txt")));
+            String line = reader.readLine();
+            JSONParser parser = new JSONParser();
+            JSONObject obj = (JSONObject) parser.parse(line);
+            LevelController.setBestScore((int)((long)obj.get("best_score")));
+            
+            line = reader.readLine();
+            while(line!=null){
+                JSONObject achievementObj = (JSONObject) parser.parse(line);
+                achievementManager.setAchievementProgress((String)achievementObj.get("name"), (double)achievementObj.get("progress"));
+                line = reader.readLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -137,7 +164,7 @@ public class Game extends Canvas implements Runnable {
         }
         System.exit(0);
     }
-    
+
     private void tick() {
         achievementManager.tick();
 
