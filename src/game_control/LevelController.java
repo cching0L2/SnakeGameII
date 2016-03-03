@@ -1,12 +1,25 @@
 package game_control;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.json.simple.JSONObject;
+
 import game_UI.Game;
 import game_UI.HUD;
-import game_elements.*;
+import game_elements.Bush;
+import game_elements.Category;
+import game_elements.Cookie;
+import game_elements.Door;
+import game_elements.Fence;
+import game_elements.FlowerPatch;
+import game_elements.Fountain;
+import game_elements.GameElements;
+import game_elements.Orientation;
+import game_elements.Snake;
 
 public class LevelController {
     Handler handler;
@@ -218,5 +231,16 @@ public class LevelController {
     
     public static void clearPrevSnakeLength(){
         prevSnakeLength = 0;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static void writeToFile(Writer writer){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("best_score", new Integer(bestScore));
+            writer.write(obj.toString()+"\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

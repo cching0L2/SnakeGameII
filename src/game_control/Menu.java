@@ -2,9 +2,11 @@ package game_control;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.Random;
 
-import game_UI.*;
+import game_UI.Game;
+import game_UI.HUD;
 
 public class Menu extends MouseAdapter{
     Handler handler;
@@ -13,7 +15,8 @@ public class Menu extends MouseAdapter{
     Random random;
     private String currentSelect="";
     
-    int XCursor, YCursor;
+    int XCursor;
+    int YCursor;
     
     public Menu(LevelController levelController, HUD hud, Handler handler){
         this.handler = handler;
@@ -33,7 +36,12 @@ public class Menu extends MouseAdapter{
                 Game.gameState = State.Game;
             }
             else if(currentSelect == "Quit")
-                Game.exitGame();
+                try {
+                    Game.exitGame();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                    System.exit(0);
+                }
             else if(currentSelect == "Achievements")
                 Game.gameState = State.Achievement;
             else if(currentSelect == "Game Instruction")
@@ -43,7 +51,12 @@ public class Menu extends MouseAdapter{
         else if(Game.gameState==State.Over){
             handler.objects.clear();
             if(mouseSelect(XCursor, YCursor, 185, 380, 155, 40))
-                Game.exitGame();
+                try {
+                    Game.exitGame();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                    System.exit(0);
+                }
             else if(mouseSelect(XCursor, YCursor, 185, 270, 155, 40)){
                 levelController.initializeGame(handler);
                 Game.gameState = State.Game;
@@ -54,7 +67,12 @@ public class Menu extends MouseAdapter{
         }
         else if(Game.gameState==State.Pause){
             if(mouseSelect(XCursor, YCursor, 185, 355, 155, 40))
-                Game.exitGame();
+                try {
+                    Game.exitGame();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                    System.exit(0);
+                }
             else if(mouseSelect(XCursor, YCursor, 185, 295, 155, 40)){
                 Game.gameState = State.Menu;
             }

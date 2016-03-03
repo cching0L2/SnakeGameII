@@ -1,5 +1,12 @@
 package game_control;
 
+import java.io.IOException;
+import java.io.Writer;
+import java.util.List;
+
+import org.json.simple.JSONObject;
+
+import game_UI.AchievementIcon;
 import game_UI.Game;
 import game_UI.GameWindows.AchievementWindow;
 
@@ -8,6 +15,7 @@ public class AchievementManager {
     LevelController levelController;
     Handler handler;
     AchievementWindow achievementWindow;
+    static List<AchievementIcon> iconList;
     
     int FIRST_STEP = 0, DEAD_ON_THE_SPOT = 5, COOKIE_LOVER = 10, COOKIE_COLLECTOR = 1, SO_SO_SNAKE = 6, PRETTY_GOOD = 11, 
             PLANT_DESTROYER = 2, WATER_CONTAMINANT = 7, FENCE_FINDER = 12, AMBITIOUS_DREAMER = 3, DONUT_TASTER = 8, 
@@ -23,10 +31,28 @@ public class AchievementManager {
     }
 
     public static AchievementManager getInstace(LevelController level_controller, Handler handler, AchievementWindow achievementWindow) {
-        if (instance == null)
+        if (instance == null){
             instance = new AchievementManager(level_controller, handler, achievementWindow);
+            iconList = achievementWindow.iconList;
+        }
 
         return instance;
+    }
+    
+    
+    @SuppressWarnings("unchecked")
+    public static void writeToFile(Writer writer){
+        for(AchievementIcon ai : iconList){
+            JSONObject obj = new JSONObject();
+            obj.put("name",ai.getName());
+            obj.put("progress", ai.getProgress());
+            
+            try {
+                writer.write(obj.toString()+"\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
     public void tick(){

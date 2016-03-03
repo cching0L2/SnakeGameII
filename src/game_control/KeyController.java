@@ -2,6 +2,7 @@ package game_control;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import game_UI.*;
 
@@ -37,7 +38,12 @@ public class KeyController extends KeyAdapter {
                 break;
             }
             case KeyEvent.VK_ESCAPE: {
-                Game.exitGame();
+                try {
+                    Game.exitGame();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                    System.exit(0);
+                }
                 break;
             }
             case KeyEvent.VK_SPACE: {

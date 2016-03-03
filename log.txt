@@ -1,0 +1,16 @@
+{"best_score":6}
+{"name":"First Step","progress":1.0}
+{"name":"Cookie Collector","progress":0.24000000000000002}
+{"name":"Plant Destroyer","progress":0.0}
+{"name":"Ambitious Dreamer","progress":0.0}
+{"name":"Master Snake","progress":0.1}
+{"name":"Dead on the Spot","progress":0.0}
+{"name":"So-So Snake","progress":0.6}
+{"name":"Water Contaminant","progress":0.0}
+{"name":"Donut Taster","progress":0.0}
+{"name":"Cookie Lunatic","progress":0.075}
+{"name":"Cookie Lover","progress":0.6}
+{"name":"Pretty Good","progress":0.2}
+{"name":"Fence Finder","progress":0.0}
+{"name":"Donut Dealer","progress":0.0}
+{"name":"Living Legend","progress":0.06666666666666667}

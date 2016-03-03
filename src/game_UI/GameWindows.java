@@ -19,7 +19,6 @@ import game_control.Menu;
 import game_control.Position;
 import game_control.Util;
 import game_elements.Category;
-import game_elements.Cookie;
 import game_elements.SmartSnake;
 
 public class GameWindows{
